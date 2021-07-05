@@ -70,8 +70,11 @@ header {
   font-weight: bolder;
   color: #ffffff;
 }
-.typetab i {
-  padding-right: 9px;
+.typetab img {
+  margin-right: 9px;
+  color: #ffffff;
+  filter: invert(100%) sepia(96%) hue-rotate(74deg) brightness(104%)
+    contrast(104%);
 }
 #present {
   background-color: #ff8836;
@@ -83,20 +86,24 @@ header {
   margin-bottom: 14px;
 }
 /*   upload pic   */
-.picture i {
+.picture img {
   width: 52px;
   height: 46px;
   color: #ff8836;
+  filter: invert(87%) sepia(5%) saturate(6376%) hue-rotate(306deg)
+    brightness(120%) contrast(101%);
 }
 .uptxt {
   font-size: 14px;
   color: #adafb3;
   text-align: center;
+  margin-top: 9px;
 }
 .picture {
   width: 302px;
   height: 365px;
   border: #ff8836 3px solid;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
