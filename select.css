@@ -109,3 +109,36 @@ header {
   justify-content: center;
   align-items: center;
 }
+/*   pc screen   */
+@media screen and (min-width: 768px) {
+  header img {
+    width: 258px;
+    height: 104px;
+  }
+  header {
+    padding-bottom: 10px;
+  }
+  .version {
+    bottom: 10px;
+  }
+  .info {
+    width: 600px;
+    height: 41px;
+    border-radius: 21px;
+  }
+  .typetab button {
+    width: 180px;
+    border-radius: 23px;
+  }
+  .typetab {
+    width: 600px;
+  }
+  .picture {
+    width: 600px;
+    height: 547px;
+    margin-bottom: 68px;
+  }
+  .uptxt {
+    margin-top: 12px;
+  }
+}
