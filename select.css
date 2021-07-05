@@ -57,5 +57,48 @@ header {
   flex-direction: column;
   align-items: center;
   padding: 6px 19px;
-  margin: 12px;
+  margin-bottom: 12px;
+}
+/*   buttons   */
+.typetab button {
+  width: 94px;
+  height: 33px;
+  border: none;
+  border-radius: 20px;
+  background-color: #e2e2e2;
+  font-size: 14px;
+  font-weight: bolder;
+  color: #ffffff;
+}
+.typetab i {
+  padding-right: 9px;
+}
+#present {
+  background-color: #ff8836;
+}
+.typetab {
+  width: 302px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+/*   upload pic   */
+.picture i {
+  width: 52px;
+  height: 46px;
+  color: #ff8836;
+}
+.uptxt {
+  font-size: 14px;
+  color: #adafb3;
+  text-align: center;
+}
+.picture {
+  width: 302px;
+  height: 365px;
+  border: #ff8836 3px solid;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
