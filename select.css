@@ -1,0 +1,61 @@
+@font-face {
+  font-family: "NanumSquareRound";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  font-family: "NanumSquareRound";
+  font-weight: bold;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/*   title bar   */
+.version {
+  font-family: "Roboto";
+  font-size: 12px;
+  font-weight: lighter;
+  position: absolute;
+  bottom: 9px;
+  right: -40px;
+}
+header {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  position: relative;
+  padding-bottom: 2px;
+}
+/*   information   */
+.parti,
+.cordi {
+  height: 13px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.txt {
+  font-weight: lighter;
+  font-size: 12px;
+}
+.name {
+  padding-right: 4px;
+}
+.info {
+  width: 303px;
+  height: 38px;
+  border: #c9c9c9 1px solid;
+  border-radius: 19px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 19px;
+  margin: 12px;
+}
