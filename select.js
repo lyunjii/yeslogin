@@ -48,7 +48,7 @@ function is_mobile()
   return false;    
 
 }
-
+/*
 function loadPic(input){
 
   document.querySelector('upPicBox').style.visibility = "hidden";
@@ -72,3 +72,4 @@ function loadPic(input){
   document.querySelector('showPic').style.visibility = "visible"
 
 }
+*/
