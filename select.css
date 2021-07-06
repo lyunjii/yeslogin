@@ -48,7 +48,7 @@ body {
 .name {
   padding-right: 4px;
 }
-.info {
+#info {
   width: 303px;
   height: 38px;
   border: #c9c9c9 1px solid;
@@ -60,7 +60,7 @@ body {
   margin-bottom: 12px;
 }
 /*   buttons   */
-.typetab button {
+.tabBtn {
   width: 94px;
   height: 33px;
   border: none;
@@ -106,6 +106,11 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+}
+.upPicBox {
+  width: 100%;
+  height: 100%;
 }
 .picture {
   width: 302px;
@@ -117,14 +122,18 @@ body {
   justify-content: center;
   align-items: center;
 }
+.showPic {
+  width: 100%;
+  height: 100%;
+}
 /*   pc screen   */
 
 @media screen and (min-width: 768px) {
-  header img {
+  #logo {
     width: 258px;
     height: 104px;
   }
-  header {
+  .header {
     padding-bottom: 10px;
   }
   .version {
@@ -135,7 +144,7 @@ body {
     height: 41px;
     border-radius: 21px;
   }
-  .typetab button {
+  .tabBtn {
     width: 180px;
     border-radius: 23px;
   }
@@ -151,3 +160,4 @@ body {
     margin-top: 12px;
   }
 }
+*/
