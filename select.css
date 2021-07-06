@@ -16,6 +16,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #FAFBFC;
 }
 /*   title bar   */
 .version {
@@ -53,6 +54,7 @@ body {
   height: 38px;
   border: #c9c9c9 1px solid;
   border-radius: 19px;
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -117,6 +119,7 @@ body {
   height: 365px;
   border: #ff8836 3px solid;
   border-radius: 10px;
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   justify-content: center;
