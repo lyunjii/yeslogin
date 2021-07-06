@@ -26,7 +26,7 @@ body {
   bottom: 9px;
   right: -40px;
 }
-header {
+.header {
   display: flex;
   justify-content: center;
   align-items: baseline;
@@ -99,6 +99,14 @@ header {
   text-align: center;
   margin-top: 9px;
 }
+.upPicLabel {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .picture {
   width: 302px;
   height: 365px;
@@ -110,6 +118,7 @@ header {
   align-items: center;
 }
 /*   pc screen   */
+
 @media screen and (min-width: 768px) {
   header img {
     width: 258px;
