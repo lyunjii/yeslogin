@@ -48,28 +48,31 @@ function is_mobile()
   return false;    
 
 }
-/*
+
 function loadPic(input){
 
-  document.querySelector('upPicBox').style.visibility = "hidden";
+  //document.querySelector('.upPicBox').style.visibility = "hidden";
 
   var file = input.files[0];
 
+//  var newImage = document.createElement("img");
+//  newImage.setAttribute("class", 'newPic');
 
-  var newImage = document.createElement("img");
-  newImage.setAttribute("class", 'newPic');
-
+  var newImage = document.querySelector('.upPicImg');
+  
   newImage.src = URL.createObjectURL(file);
 
   newImage.style.width = "100%";
   newImage.style.height = "100%";
   newImage.style.objectFit = "contain";
-  newImage.style.visibility = "visible";
+  newImage.style.filter = "none";
+  //newImage.style.visibility = "visible";
 
-  var container = document.querySelector('showPic');
-  container.appendChild(newImage);
+  document.querySelector('.uptxt').style.display = "none";
 
-  document.querySelector('showPic').style.visibility = "visible"
+  // var container = document.querySelector('.showPic');
+  // container.appendChild(newImage);
+
+  // document.querySelector('.showPic').style.visibility = "visible"
 
 }
-*/
