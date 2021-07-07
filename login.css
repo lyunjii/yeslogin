@@ -91,7 +91,7 @@ header {
   height: 30px;
 }
 /*   ok button   */
-.okbtn > input {
+.okbtn {
   width: 302px;
   height: 41px;
   background-color: #ff8836;
@@ -101,39 +101,4 @@ header {
   border: none;
   border-radius: 21px;
   padding-top: 5px;
-}
-/*   pc screen   */
-@media screen and (min-width: 768px) {
-  header img {
-    width: 258px;
-    height: 104px;
-  }
-  .version {
-    bottom: 36px;
-  }
-  header {
-    padding-bottom: 36px;
-  }
-  .inputel {
-    margin-bottom: 8px;
-  }
-  .txt {
-    width: 69px;
-  }
-  .box {
-    width: 424px;
-    padding-left: 22px;
-  }
-  .participant {
-    padding-bottom: 38px;
-  }
-  #cordimail {
-    width: 374px;
-  }
-  .cordinator {
-    padding-bottom: 60px;
-  }
-  .okbtn input {
-    width: 494px;
-  }
 }
