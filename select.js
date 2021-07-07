@@ -1,31 +1,36 @@
 window.onload = function (){
   if(is_mobile() === false){
-    var logo = document.getElementById('logo');
+    var logo = document.querySelector('.logo');
     logo.style.width = "258px";
     logo.style.height = "104px"
 
-    document.querySelector('header').style.paddingBottom = "10px";
-    document.querySelector('.version').style.bottom = "10px";
+    document.querySelector('header').style.paddingBottom = "27px";
+    document.querySelector('.version').style.bottom = "27px";
 
-    var info = document.getElementById('info');
+    var info = document.querySelector('.info');
     info.style.width = "600px";
-    info.style.height = "41px";
-    info.style.borderRadius = "21px";
+    info.style.flexDirection = "row-reverse";
+    info.style.justifyContent = "space-between";
+    info.style.paddingBottom = "20px";
+
+    var user = document.getElementsByClassName('user');
+    for(var i = 0; i < user.length; i++){
+      user[i].style.width = "296px";
+    }
 
     var btn = document.getElementsByClassName('tabBtn');
     for(var i = 0; i < btn.length; i++){
-      btn[i].style.width = "180px";
-      btn[i].style.borderRadius = "23px";
+      btn[i].style.width = "300px";
     }
 
-    document.querySelector('.typetab').style.width = "600px";
+    document.querySelector('.typeTab').style.width = "600px";
 
     var picture = document.querySelector('.picture');
     picture.style.width = "600px";
     picture.style.height = "547px";
-    picture.style.marginBottom = "68px";
+    picture.style.marginBottom = "177px";
 
-    document.querySelector('.uptxt').style.marginTop = "12px";
+    document.querySelector('.upTxt').style.marginTop = "12px";
 
   }
 }
@@ -50,13 +55,29 @@ function is_mobile()
 }
 
 function loadPic(input){
-
-  //document.querySelector('.upPicBox').style.visibility = "hidden";
+  // use another div & img tag
+  document.querySelector('.upPicBox').style.display = "none";
 
   var file = input.files[0];
 
-//  var newImage = document.createElement("img");
-//  newImage.setAttribute("class", 'newPic');
+  var newImage = document.createElement("img");
+  newImage.setAttribute("class", 'newPic');
+
+  newImage.src = URL.createObjectURL(file);
+
+  newImage.style.width = "100%";
+  newImage.style.height = "100%";
+  newImage.style.objectFit = "contain";
+  newImage.style.filter = "none";
+
+  var container = document.querySelector('.showPic');
+  container.appendChild(newImage);
+
+  document.querySelector('.showPic').style.display = "block";
+
+  /*
+  // change url of img
+  var file = input.files[0];
 
   var newImage = document.querySelector('.upPicImg');
   
@@ -66,13 +87,7 @@ function loadPic(input){
   newImage.style.height = "100%";
   newImage.style.objectFit = "contain";
   newImage.style.filter = "none";
-  //newImage.style.visibility = "visible";
 
-  document.querySelector('.uptxt').style.display = "none";
-
-  // var container = document.querySelector('.showPic');
-  // container.appendChild(newImage);
-
-  // document.querySelector('.showPic').style.visibility = "visible"
-
+  document.querySelector('.upTxt').style.display = "none";
+  */
 }

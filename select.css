@@ -24,7 +24,7 @@ body {
   font-size: 12px;
   font-weight: lighter;
   position: absolute;
-  bottom: 9px;
+  bottom: 12px;
   right: -40px;
 }
 .header {
@@ -32,47 +32,59 @@ body {
   justify-content: center;
   align-items: baseline;
   position: relative;
-  padding-bottom: 2px;
+  padding-bottom: 3px;
 }
 /*   information   */
-.parti,
-.cordi {
-  height: 13px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.txt {
-  font-weight: lighter;
-  font-size: 12px;
-}
-.name {
-  padding-right: 4px;
-}
-#info {
+.user {
   width: 303px;
-  height: 38px;
+  height: 34px;
   border: #c9c9c9 1px solid;
   border-radius: 19px;
+  display: flex;
+  align-items: center;
+  padding: 7px 10px 7px 15px;
+  margin-bottom: 4px;
+}
+.name {
+  width: 44px;
+  margin-right: 10px;
+  font-size: 12px;
+}
+.mail {
+  font-family: "Roboto";
+  font-size: 12px;
+  font-weight: lighter;
+}
+.parti > .mail {
+  margin-right: auto;
+}
+.logoutBtn {
+  width: 63px;
+  height: 20px;
+  border: #c9c9c9 1px solid;
+  border-radius: 10px;
+  background-color: #f4f5f6;
+  font-size: 12px;
+  font-weight: lighter;
+}
+.info {
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 6px 19px;
-  margin-bottom: 12px;
+  padding-bottom: 3px;
 }
 /*   buttons   */
 .tabBtn {
-  width: 94px;
-  height: 33px;
+  width: 152px;
+  height: 32px;
   border: none;
-  border-radius: 20px;
   background-color: #e2e2e2;
   font-size: 14px;
   font-weight: bolder;
   color: #ffffff;
 }
-.typetab img {
+.iconImg {
   margin-right: 9px;
   color: #ffffff;
   filter: invert(100%) sepia(96%) hue-rotate(74deg) brightness(104%)
@@ -81,21 +93,19 @@ body {
 #present {
   background-color: #ff8836;
 }
-.typetab {
+.typeTab {
   width: 302px;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 14px;
 }
 /*   upload pic   */
 .upPicImg {
   width: 52px;
   height: 46px;
-  color: #ff8836;
   filter: invert(87%) sepia(5%) saturate(6376%) hue-rotate(306deg)
     brightness(120%) contrast(101%);
 }
-.uptxt {
+.upTxt {
   font-size: 14px;
   color: #adafb3;
   text-align: center;
@@ -117,19 +127,19 @@ body {
 .showPic {
   width: 100%;
   height: 100%;
+  display: none;
 }
 .picture {
   width: 302px;
   height: 365px;
   border: #ff8836 3px solid;
-  border-radius: 10px;
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-/*   pc screen   */
+/*   media query   */
 /*
 @media screen and (min-width: 768px) {
   #logo {
