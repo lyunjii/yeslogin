@@ -1,5 +1,5 @@
 window.onload = function (){
-  if(is_mobile() === false){
+  if(is_mobile() === true){
     var logo = document.querySelector('.logo');
     logo.style.width = "258px";
     logo.style.height = "104px"
@@ -28,10 +28,19 @@ window.onload = function (){
     var picture = document.querySelector('.picture');
     picture.style.width = "600px";
     picture.style.height = "547px";
-    picture.style.marginBottom = "177px";
 
     document.querySelector('.upTxt').style.marginTop = "12px";
 
+    var msgBox = document.querySelector('.msgBox');
+    msgBox.style.width = "600px";
+    msgBox.style.height = "45px";
+    msgBox.style.fontSize = "16px";
+    msgBox.style.marginBottom = "20px"
+
+    var senBtn = document.querySelector('.sendBtn');
+    senBtn.style.width = "600px";
+    senBtn.style.height = "45px";
+    senBtn.style.borderRadius = "23px";
   }
 }
 
@@ -74,6 +83,11 @@ function loadPic(input){
   container.appendChild(newImage);
 
   document.querySelector('.showPic').style.display = "block";
+  document.querySelector('.picture').style.marginBottom = "0px";
+  var opt = document.getElementsByClassName('option');
+    for(var i = 0; i < opt.length; i++){
+      opt[i].style.display = "block";
+    }
 
   /*
   // change url of img

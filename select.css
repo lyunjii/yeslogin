@@ -94,7 +94,7 @@ body {
   background-color: #ff8836;
 }
 .typeTab {
-  width: 302px;
+  width: 304px;
   display: flex;
   justify-content: space-between;
 }
@@ -130,7 +130,7 @@ body {
   display: none;
 }
 .picture {
-  width: 302px;
+  width: 304px;
   height: 365px;
   border: #ff8836 3px solid;
   background-color: #ffffff;
@@ -138,39 +138,36 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 30px;
 }
-/*   media query   */
-/*
-@media screen and (min-width: 768px) {
-  #logo {
-    width: 258px;
-    height: 104px;
-  }
-  .header {
-    padding-bottom: 10px;
-  }
-  .version {
-    bottom: 10px;
-  }
-  .info {
-    width: 600px;
-    height: 41px;
-    border-radius: 21px;
-  }
-  .tabBtn {
-    width: 180px;
-    border-radius: 23px;
-  }
-  .typetab {
-    width: 600px;
-  }
-  .picture {
-    width: 600px;
-    height: 547px;
-    margin-bottom: 68px;
-  }
-  .uptxt {
-    margin-top: 12px;
-  }
+/*   msg Box   */
+.msgBox {
+  width: 304px;
+  height: 33px;
+  background-color: #f6f6f6;
+  border: #c9c9c9 2px solid;
+  border-radius: 0px;
+  color: #c9c9c9;
+  font-size: 14px;
+  font-weight: lighter;
+  padding: 8.5px 19.75px;
+  margin-bottom: 8px;
 }
-*/
+.msgBox::-webkit-input-placeholder {
+  color: #c9c9c9;
+}
+/*   send Button   */
+.sendBtn {
+  width: 302px;
+  height: 33px;
+  background-color: #ff8836;
+  border: none;
+  border-radius: 20px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: bolder;
+  margin-bottom: 30px;
+}
+.option {
+  display: none;
+}
