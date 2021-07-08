@@ -1,5 +1,5 @@
 window.onload = function (){
-  if(is_mobile() === true){
+  if(is_mobile() === false){
     var logo = document.querySelector('.logo');
     logo.style.width = "258px";
     logo.style.height = "104px"
