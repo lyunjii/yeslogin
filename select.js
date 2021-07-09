@@ -105,7 +105,7 @@ function loadPic(input){
 
   var editBtn = document.querySelector('.editBtn');
   editBtn.style.display = "flex";
-  editBtn.style.top = "487px";
+  if(is_mobile === false){ editBtn.style.top = "487px"; }
 
   /*
   // change url of img
