@@ -105,7 +105,7 @@ function loadPic(input){
 
   var editBtn = document.querySelector('.editBtn');
   editBtn.style.display = "flex";
-  if(is_mobile === false){ editBtn.style.top = "487px"; }
+  if(is_mobile() === false){ editBtn.style.top = "487px"; }
 
   /*
   // change url of img
@@ -142,9 +142,11 @@ const cropper = new Cropper(image, {
 
 //var TEMPLATE = '<div class="cropper-container" touch-action="none">' + '<div class="cropper-wrap-box">' + '<div class="cropper-canvas"></div>' + '</div>' + '<div class="cropper-drag-box"></div>' + '<div class="cropper-crop-box">' + '<span class="cropper-view-box"></span>' + '<span class="cropper-dashed dashed-h"></span>' + '<span class="cropper-dashed dashed-v"></span>' + '<span class="cropper-center"></span>' + '<span class="cropper-face"></span>' + '<span class="cropper-line line-e" data-cropper-action="e"></span>' + '<span class="cropper-line line-n" data-cropper-action="n"></span>' + '<span class="cropper-line line-w" data-cropper-action="w"></span>' + '<span class="cropper-line line-s" data-cropper-action="s"></span>' + '<span class="cropper-point point-e" data-cropper-action="e"></span>' + '<span class="cropper-point point-n" data-cropper-action="n"></span>' + '<span class="cropper-point point-w" data-cropper-action="w"></span>' + '<span class="cropper-point point-s" data-cropper-action="s"></span>' + '<span class="cropper-point point-ne" data-cropper-action="ne"></span>' + '<span class="cropper-point point-nw" data-cropper-action="nw"></span>' + '<span class="cropper-point point-sw" data-cropper-action="sw"></span>' + '<span class="cropper-point point-se" data-cropper-action="se"></span>' + '</div>' + '</div>';
 
+var cropper;
+
 function editImg(){
   const image = document.getElementById('newPic');
-  const cropper = new Cropper(image, {
+  cropper = new Cropper(image, {
     viewMode: 2,
     dragMode: 'none',
     aspectRatio: 16 / 9,
@@ -157,5 +159,9 @@ function editImg(){
 }
 
 function rotateLeft(){
+  cropper.rotate(-90);
+}
+
+function rotateRight(){
   cropper.rotate(90);
 }
