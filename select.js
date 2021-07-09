@@ -1,5 +1,5 @@
 window.onload = function (){
-  if(is_mobile() === false){
+  if(!is_mobile()){
     var logo = document.querySelector('.logo');
     logo.style.width = "258px";
     logo.style.height = "104px"
@@ -107,7 +107,7 @@ function loadPic(input){
 
   var editBtn = document.querySelector('.editBtn');
   editBtn.style.display = "flex";
-  if(is_mobile() === false){ editBtn.style.top = "487px"; }
+  if(!is_mobile()){ editBtn.style.top = "487px"; }
 
   /*
   // change url of img
@@ -172,10 +172,10 @@ function getImage(){
   var newCanvas = document.createElement("canvas");
   newCanvas.setAttribute("id", 'newCanvas');
 
-  if(is_mobile() === true){
+  if(is_mobile()){
     newCanvas = cropper.getCroppedCanvas({
-      width: 204,
-      height: 365
+      width: 298,
+      height: 359
     });
   }
   else{
@@ -191,8 +191,6 @@ function getImage(){
   container.style.display = "flex";
   container.style.alignItems = "center";
   document.querySelector('.showPic').style.display = "none";
-
-
 }
 
 /**
