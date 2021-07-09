@@ -174,8 +174,8 @@ function getImage(){
 
   if(is_mobile() === true){
     newCanvas = cropper.getCroppedCanvas({
-      width: 298,
-      height: 359
+      width: 204,
+      height: 365
     });
   }
   else{
