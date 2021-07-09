@@ -167,6 +167,9 @@ body {
   font-weight: bolder;
   margin-bottom: 30px;
 }
+.sendIcon {
+  margin-right: 3.5px;
+}
 .option {
   display: none;
 }

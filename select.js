@@ -37,10 +37,17 @@ window.onload = function (){
     msgBox.style.fontSize = "16px";
     msgBox.style.marginBottom = "20px"
 
-    var senBtn = document.querySelector('.sendBtn');
-    senBtn.style.width = "600px";
-    senBtn.style.height = "45px";
-    senBtn.style.borderRadius = "23px";
+    var sendBtn = document.querySelector('.sendBtn');
+    sendBtn.style.width = "600px";
+    sendBtn.style.height = "45px";
+    sendBtn.style.borderRadius = "23px";
+
+    var sendIcon = document.querySelector('.sendIcon');
+    sendIcon.style.width = "19.71px";
+    sendIcon.style.height = "20px";
+    sendIcon.style.marginRight = "10.88px";
+    
+
   }
 }
 
