@@ -46,6 +46,10 @@ window.onload = function (){
     sendIcon.style.width = "19.71px";
     sendIcon.style.height = "20px";
     sendIcon.style.marginRight = "10.88px";
+
+    var cropPointer = document.querySelector('.point-se');
+    cropPointer.style.width = "22px";
+    cropPointer.style.height = "22px";
     
 
   }
@@ -85,6 +89,7 @@ function loadPic(input){
   newImage.style.height = "100%";
   newImage.style.objectFit = "contain";
   newImage.style.filter = "none";
+  newImage.style.maxWidth = "100%";
 
   var container = document.querySelector('.showPic');
   container.appendChild(newImage);
@@ -137,19 +142,20 @@ function editImg(){
   const image = document.getElementById('newPic');
   const cropper = new Cropper(image, {
     viewMode: 2,
-    //dragMode: 'none',
+    dragMode: 'none',
     aspectRatio: 16 / 9,
     center: false,
     highlight: false,
     background: false,
     autoCropArea: 1,
-    cropBoxResizable: false,
     crop(event) {},
   });
 
-  document.querySelector('.cropper-modal').style.opacity = "0.7";
-  var point = document.getElementsByClassName('cropper-point');
-  for(var i = 0; i < point.length; i++){
-    point[i].style.backgroundColor = "#FF8836";
+  if(is_mobile === false){
+    
+    var cropPointer = document.querySelector('.point-se');
+    cropPointer.style.width = "22px";
+    cropPointer.style.height = "22px";
+    
   }
 }

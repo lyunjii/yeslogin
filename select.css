@@ -173,3 +173,35 @@ body {
 .option {
   display: none;
 }
+/*   cropper   */
+.cropper-modal {
+  opacity: 0.7;
+}
+.cropper-dashed {
+  border: #ff8836 1px solid;
+  opacity: 1;
+}
+.cropper-dashed.dashed-h {
+  border-right: none;
+  border-left: none;
+}
+.cropper-dashed.dashed-v {
+  border-top: none;
+  border-bottom: none;
+}
+.cropper-view-box {
+  outline: none;
+}
+.cropper-line {
+  background: none;
+}
+.cropper-point {
+  display: none;
+}
+.cropper-point.point-se {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ff8836;
+  display: block;
+}
