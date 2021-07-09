@@ -104,6 +104,7 @@ body {
   height: 46px;
   filter: invert(87%) sepia(5%) saturate(6376%) hue-rotate(306deg)
     brightness(120%) contrast(101%);
+  overflow: hidden;
 }
 .upTxt {
   font-size: 14px;
@@ -124,7 +125,8 @@ body {
   width: 100%;
   height: 100%;
 }
-.showPic {
+.showPic,
+.result {
   width: 100%;
   height: 100%;
   display: none;
