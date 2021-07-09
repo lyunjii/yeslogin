@@ -47,6 +47,20 @@
       accept="image/*, ;capture=camera" onchange="loadPic(this)">
     </div>
     <div class="showPic"></div>
+    <div class="editBtn">
+      <button class="rotate rotateL">
+        <img src="img/left_rotate.svg" alt="" onclick="rotateLeft()">
+      </button>
+      <button class="rotate rotateR">
+        <img src="img/right_rotate.svg" alt="">
+      </button>
+      <button class="do done">
+        <img src="img/check_button.svg" alt="">
+      </button>
+      <button class="do undo">
+        <img src="img/undo_button.svg" alt="">
+      </button>
+    </div>
   </section>
   <section class="option">
     <input class="msgBox" type="text" placeholder="최대 30자 메시지 입력">
