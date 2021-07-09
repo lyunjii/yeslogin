@@ -86,10 +86,6 @@ header {
   justify-content: center;
   align-items: center;
 }
-.location img {
-  width: 21px;
-  height: 30px;
-}
 /*   ok button   */
 .okbtn {
   width: 302px;
