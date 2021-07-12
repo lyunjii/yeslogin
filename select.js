@@ -51,7 +51,6 @@ window.onload = function (){
     cropPointer.style.width = "22px";
     cropPointer.style.height = "22px";
     
-
   }
 }
 
@@ -74,7 +73,7 @@ function is_mobile()
 
 }
 
-function loadPic(input){
+function load_image(input){
   // use another div & img tag
   document.querySelector('.upPicBox').style.display = "none";
 
@@ -103,7 +102,7 @@ function loadPic(input){
   newImage.style.filter = "none";
   newImage.style.maxWidth = "100%";
 
-  editImg();
+  edit_image();
 
   var editBtn = document.querySelector('.editBtn');
   editBtn.style.display = "flex";
@@ -124,21 +123,6 @@ function loadPic(input){
 
   document.querySelector('.upTxt').style.display = "none";
 
-import Cropper from 'cropperjs';
-const image = document.querySelector('.newPic');
-const cropper = new Cropper(image, {
-  aspectRatio: 16 / 9,
-  crop(event) {
-    console.log(event.detail.x);
-    console.log(event.detail.y);
-    console.log(event.detail.width);
-    console.log(event.detail.height);
-    console.log(event.detail.rotate);
-    console.log(event.detail.scaleX);
-    console.log(event.detail.scaleY);
-  },
-});
-
   */
 }
 
@@ -146,7 +130,7 @@ const cropper = new Cropper(image, {
 
 var cropper;
 
-function editImg(){
+function edit_image(){
   const image = document.getElementById('newPic');
   cropper = new Cropper(image, {
     viewMode: 2,
@@ -168,8 +152,10 @@ function rotateRight(){
   cropper.rotate(90);
 }
 
-function getImage(){
-  var newCanvas = document.createElement("canvas");
+var newCanvas = null;
+function get_image(){
+  newCanvas = null;
+  newCanvas = document.createElement("canvas");
   newCanvas.setAttribute("id", 'newCanvas');
 
   if(is_mobile()){
@@ -191,4 +177,29 @@ function getImage(){
   container.style.display = "flex";
   container.style.alignItems = "center";
   document.querySelector('.showPic').style.display = "none";
+}
+
+function upload_image(){
+  if(newCanvas == null){
+    alert("영역을 선택하세요");
+    return;
+  }
+
+  var msg = document.getElementById("msgBox").value.trim();
+  console.log(msg);
+  if(msg == null || msg == ""){
+    alert("메시지를 입력하세요");
+    return;
+  }
+  console.log(newCanvas);
+  //parent.sunny.uploadToGD_base64(newCanvas.toDataURL("image/PNG",1),msg,);
+
+
+  document.querySelector('.editBtn').style.display = "none";
+  document.querySelector('.result').style.display = "none";
+  var opt = document.getElementsByClassName('option');
+  for(var i = 0; i < opt.length; i++){
+    opt[i].style.display = "none";
+  }
+  document.querySelector('.upPicBox').style.display = "block";
 }
