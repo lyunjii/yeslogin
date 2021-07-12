@@ -20,7 +20,7 @@ window.onload = function (){
 
     var btn = document.getElementsByClassName('tabBtn');
     for(var i = 0; i < btn.length; i++){
-      btn[i].style.width = "300px";
+      btn[i].style.width = "200px";
     }
 
     document.querySelector('.typeTab').style.width = "600px";
@@ -150,7 +150,7 @@ function get_image(){
 
     if(is_mobile()){
       newCanvas = cropper.getCroppedCanvas({
-        width: 298,
+        width: 297,
         height: 359
       });
     }

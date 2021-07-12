@@ -76,7 +76,7 @@ body {
 }
 /*   buttons   */
 .tabBtn {
-  width: 152px;
+  width: 101px;
   height: 32px;
   border: none;
   background-color: #e2e2e2;
@@ -94,7 +94,7 @@ body {
   background-color: #ff8836;
 }
 .typeTab {
-  width: 304px;
+  width: 303px;
   display: flex;
   justify-content: space-between;
 }
@@ -132,7 +132,7 @@ body {
   display: none;
 }
 .picture {
-  width: 304px;
+  width: 303px;
   height: 365px;
   border: #ff8836 3px solid;
   background-color: #ffffff;
@@ -145,7 +145,7 @@ body {
 }
 /*   msg Box   */
 .msgBox {
-  width: 304px;
+  width: 303px;
   height: 33px;
   background-color: #f6f6f6;
   border: #c9c9c9 2px solid;
@@ -160,7 +160,7 @@ body {
 }
 /*   send Button   */
 .sendBtn {
-  width: 302px;
+  width: 303px;
   height: 33px;
   background-color: #ff8836;
   border: none;
@@ -221,7 +221,7 @@ body {
   background: none;
 }
 .rotateL,
-.done {
+.undo {
   margin-right: 12px;
 }
 .rotateR {
