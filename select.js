@@ -83,22 +83,20 @@ var msgBox = document.querySelector('.msgBox');
 function load_image(input){
   upPicBox.style.display = "none";
 
-  var file = input.files[0];
-
   var newImage = document.createElement("img");
   newImage.setAttribute("id", 'newPic');
 
+  var file = input.files[0];
   newImage.src = URL.createObjectURL(file);
 
-  var container = showPic;
-  container.appendChild(newImage);
+  showPic.appendChild(newImage);
 
-  container.style.display = "block";
+  showPic.style.display = "block";
   picture.style.marginBottom = "0px";
   var opt = document.getElementsByClassName('option');
-    for(var i = 0; i < opt.length; i++){
-      opt[i].style.display = "block";
-    }
+  for(var i = 0; i < opt.length; i++){
+    opt[i].style.display = "block";
+  }
 
   newImage.style.width = "100%";
   newImage.style.height = "100%";
@@ -106,7 +104,7 @@ function load_image(input){
   //newImage.style.objectFit = "cover";
   //container.style.overflow = "hidden";
   newImage.style.filter = "none";
-  newImage.style.maxWidth = "100%";
+  //newImage.style.maxWidth = "100%";
 
   edit_image();
 
@@ -197,6 +195,7 @@ function upload_image(){
     opt[i].style.display = "none";
   }
   upPicBox.style.display = "block";
+  picture.style.marginBottom = "30px";
 
 
   while (showPic.firstChild) {
