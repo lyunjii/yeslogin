@@ -47,9 +47,9 @@ window.onload = function (){
     sendIcon.style.height = "20px";
     sendIcon.style.marginRight = "10.88px";
 
-    var cropPointer = document.querySelector('.point-se');
-    cropPointer.style.width = "22px";
-    cropPointer.style.height = "22px";
+   // var cropPointer = document.querySelector('.cropper-point.point-se');
+    //cropPointer.style.width = "22px";
+    //cropPointer.style.height = "22px";
     
   }
 }
@@ -73,9 +73,15 @@ function is_mobile()
 
 }
 
+var picture = document.querySelector('.picture');
+var upPicBox = document.querySelector('.upPicBox');
+var showPic = document.querySelector('.showPic');
+var result = document.querySelector('.result');
+var editBtn = document.querySelector('.editBtn');
+var msgBox = document.querySelector('.msgBox');
+
 function load_image(input){
-  // use another div & img tag
-  document.querySelector('.upPicBox').style.display = "none";
+  upPicBox.style.display = "none";
 
   var file = input.files[0];
 
@@ -84,11 +90,11 @@ function load_image(input){
 
   newImage.src = URL.createObjectURL(file);
 
-  var container = document.querySelector('.showPic');
+  var container = showPic;
   container.appendChild(newImage);
 
   container.style.display = "block";
-  document.querySelector('.picture').style.marginBottom = "0px";
+  picture.style.marginBottom = "0px";
   var opt = document.getElementsByClassName('option');
     for(var i = 0; i < opt.length; i++){
       opt[i].style.display = "block";
@@ -104,26 +110,9 @@ function load_image(input){
 
   edit_image();
 
-  var editBtn = document.querySelector('.editBtn');
   editBtn.style.display = "flex";
   if(!is_mobile()){ editBtn.style.top = "487px"; }
 
-  /*
-  // change url of img
-  var file = input.files[0];
-
-  var newImage = document.querySelector('.upPicImg');
-  
-  newImage.src = URL.createObjectURL(file);
-
-  newImage.style.width = "100%";
-  newImage.style.height = "100%";
-  newImage.style.objectFit = "contain";
-  newImage.style.filter = "none";
-
-  document.querySelector('.upTxt').style.display = "none";
-
-  */
 }
 
 //var TEMPLATE = '<div class="cropper-container" touch-action="none">' + '<div class="cropper-wrap-box">' + '<div class="cropper-canvas"></div>' + '</div>' + '<div class="cropper-drag-box"></div>' + '<div class="cropper-crop-box">' + '<span class="cropper-view-box"></span>' + '<span class="cropper-dashed dashed-h"></span>' + '<span class="cropper-dashed dashed-v"></span>' + '<span class="cropper-center"></span>' + '<span class="cropper-face"></span>' + '<span class="cropper-line line-e" data-cropper-action="e"></span>' + '<span class="cropper-line line-n" data-cropper-action="n"></span>' + '<span class="cropper-line line-w" data-cropper-action="w"></span>' + '<span class="cropper-line line-s" data-cropper-action="s"></span>' + '<span class="cropper-point point-e" data-cropper-action="e"></span>' + '<span class="cropper-point point-n" data-cropper-action="n"></span>' + '<span class="cropper-point point-w" data-cropper-action="w"></span>' + '<span class="cropper-point point-s" data-cropper-action="s"></span>' + '<span class="cropper-point point-ne" data-cropper-action="ne"></span>' + '<span class="cropper-point point-nw" data-cropper-action="nw"></span>' + '<span class="cropper-point point-sw" data-cropper-action="sw"></span>' + '<span class="cropper-point point-se" data-cropper-action="se"></span>' + '</div>' + '</div>';
@@ -153,30 +142,36 @@ function rotateRight(){
 }
 
 var newCanvas = null;
+var btnDisable = false;
 function get_image(){
-  newCanvas = null;
-  newCanvas = document.createElement("canvas");
-  newCanvas.setAttribute("id", 'newCanvas');
-
-  if(is_mobile()){
-    newCanvas = cropper.getCroppedCanvas({
-      width: 298,
-      height: 359
-    });
-  }
+  if(btnDisable){return;}
   else{
-    newCanvas = cropper.getCroppedCanvas({
-    width: 594,
-    height: 541
-  });
-  }
+    newCanvas = null;
+    newCanvas = document.createElement("canvas");
+    newCanvas.setAttribute("id", 'newCanvas');
 
-  var container = document.querySelector('.result');
-  container.appendChild(newCanvas);
-  
-  container.style.display = "flex";
-  container.style.alignItems = "center";
-  document.querySelector('.showPic').style.display = "none";
+    if(is_mobile()){
+      newCanvas = cropper.getCroppedCanvas({
+        width: 298,
+        height: 359
+      });
+    }
+    else{
+      newCanvas = cropper.getCroppedCanvas({
+      width: 594,
+      height: 541
+    });
+    }
+
+    var container = result;
+    container.appendChild(newCanvas);
+    
+    container.style.display = "flex";
+    container.style.alignItems = "center";
+    showPic.style.display = "none";
+
+    btnDisable = true;
+  }
 }
 
 function upload_image(){
@@ -185,7 +180,7 @@ function upload_image(){
     return;
   }
 
-  var msg = document.getElementById("msgBox").value.trim();
+  var msg = msgBox.value.trim();
   console.log(msg);
   if(msg == null || msg == ""){
     alert("메시지를 입력하세요");
@@ -195,11 +190,22 @@ function upload_image(){
   //parent.sunny.uploadToGD_base64(newCanvas.toDataURL("image/PNG",1),msg,);
 
 
-  document.querySelector('.editBtn').style.display = "none";
-  document.querySelector('.result').style.display = "none";
+  editBtn.style.display = "none";
+  result.style.display = "none";
   var opt = document.getElementsByClassName('option');
   for(var i = 0; i < opt.length; i++){
     opt[i].style.display = "none";
   }
-  document.querySelector('.upPicBox').style.display = "block";
+  upPicBox.style.display = "block";
+
+
+  while (showPic.firstChild) {
+    showPic.removeChild(showPic.firstChild);
+  }
+  while (result.firstChild) {
+    result.removeChild(result.firstChild);
+  }  
+  newCanvas = null;
+  msgBox.value='';
+  btnDisable = false;
 }
