@@ -69,7 +69,25 @@ function is_mobile()
   if(iOSios)
     return true;
 
-  return false;    
+
+
+
+
+
+
+
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//여기 값 바뀌어있음 고쳐서 푸시!!!!!!!!!!!!!
+  return true;    
+
+
+
+
+
+
+
+
+
 
 }
 
@@ -78,6 +96,7 @@ var upPicBox = document.querySelector('.upPicBox');
 var showPic = document.querySelector('.showPic');
 var result = document.querySelector('.result');
 var editBtn = document.querySelector('.editBtn');
+var toggle = document.querySelector('.toggle');
 var msgBox = document.querySelector('.msgBox');
 
 function load_image(input){
@@ -109,6 +128,7 @@ function load_image(input){
   edit_image();
 
   editBtn.style.display = "flex";
+  toggle.style.display = "flex";
   if(!is_mobile()){ editBtn.style.top = "487px"; }
 
 }
@@ -120,18 +140,40 @@ var cropper;
 function edit_image(){
   const image = document.getElementById('newPic');
   cropper = new Cropper(image, {
+    //이미지 창 크기보다 작게 축소 가능
     viewMode: 0,
+    //cropper 바깥에서 마우스로 사진 이동
     dragMode: 'move',
+    //cropper 비율
     aspectRatio: 16 / 9,
+    //중앙 표시, 그리드부분 밝게, 배경 체크무늬 없게
     center: false,
     highlight: false,
     background: false,
+    //초기 cropper 크기
     autoCropArea: 1,
     crop(event) {},
   });
 }
 
-var commands = [];
+var commands = [];  //버튼 명령을 저장하는 배열
+var newCanvas = null; //자른 이미지 놓을 canvas
+var btnDisable = false; //크롭 확인 버튼 비활성화
+
+//토글버튼 이미지로 수정해야함
+function toggle_cropper(toggleBtn){
+  toggle.classList.toggle('active');
+  if(toggleBtn.id === 'enable'){
+    cropper.clear();
+    btnDisable = true;
+    toggleBtn.id = 'disable';
+  }
+  else{
+    cropper.crop();
+    btnDisable = false;
+    toggleBtn.id = 'enable';
+  }
+}
 
 function rotateLeft(){
   cropper.rotate(-90);
@@ -143,8 +185,6 @@ function rotateRight(){
   commands.push("rotate_R");
 }
 
-var newCanvas = null;
-var btnDisable = false;
 function get_image(){
   if(btnDisable){return;}
   else{
@@ -169,6 +209,7 @@ function get_image(){
     
     result.style.display = "flex";
     result.style.alignItems = "center";
+    toggle.style.display = "none";
     showPic.style.display = "none";
 
     btnDisable = true;
@@ -188,6 +229,7 @@ function undo(){
       break;
     case "done":
       showPic.style.display = "block";
+      toggle.style.display = "flex";
       result.style.display = "none";
       while (result.firstChild) {
         result.removeChild(result.firstChild);
@@ -198,32 +240,62 @@ function undo(){
   }
 }
 
+function cancelUpload(){
+  cropper.destroy();
+  while (showPic.firstChild) {
+    showPic.removeChild(showPic.firstChild);
+  }
+  while (result.firstChild) {
+    result.removeChild(result.firstChild);
+  }  
+  //편집 버튼, 이미지창, 메시지칸, 확인버튼 안보이도록
+  editBtn.style.display = "none";
+  toggle.style.display = "none";
+  showPic.style.display = "none";
+  result.style.display = "none";
+  var opt = document.getElementsByClassName('option');
+  for(var i = 0; i < opt.length; i++){
+    opt[i].style.display = "none";
+  }
+  newCanvas = null;
+  msgBox.value='';
+  btnDisable = false;
+  commands = [];
+  //업로드 박스 다시 보이도록
+  upPicBox.style.display = "block";
+  picture.style.marginBottom = "30px";
+
+}
+
 function upload_image(){
+  //영역을 선택하지 않았을 때
   if(newCanvas == null){
     alert("영역을 선택하세요");
     return;
   }
-
+  //메시지를 입력하지 않았을 때
   var msg = msgBox.value.trim();
   console.log(msg);
   if(msg == null || msg == ""){
     alert("메시지를 입력하세요");
     return;
   }
+
   console.log(newCanvas);
   //parent.sunny.uploadToGD_base64(newCanvas.toDataURL("image/PNG",1),msg,);
 
-
+  //편집 버튼, 이미지창, 메시지칸, 확인버튼 안보이도록
   editBtn.style.display = "none";
   result.style.display = "none";
   var opt = document.getElementsByClassName('option');
   for(var i = 0; i < opt.length; i++){
     opt[i].style.display = "none";
   }
+  //업로드 박스 다시 보이도록
   upPicBox.style.display = "block";
   picture.style.marginBottom = "30px";
 
-
+  //이전 이미지 지우고 메시지, 명령배열 초기화
   while (showPic.firstChild) {
     showPic.removeChild(showPic.firstChild);
   }

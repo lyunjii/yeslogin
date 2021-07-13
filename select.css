@@ -55,7 +55,7 @@ body {
   font-size: 12px;
   font-weight: lighter;
 }
-.parti > .mail {
+.parti .mail {
   margin-right: auto;
 }
 .logoutBtn {
@@ -75,28 +75,36 @@ body {
   padding-bottom: 3px;
 }
 /*   buttons   */
-.tabBtn {
+.nav {
+  flex-wrap: nowrap;
+}
+.nav-link {
+  padding: 0px;
+  transition: none;
+}
+.nav-pills .nav-link {
   width: 101px;
   height: 32px;
   border: none;
+  border-radius: 0px;
   background-color: #e2e2e2;
   font-size: 14px;
   font-weight: bolder;
   color: #ffffff;
+}
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  background-color: #ff8836;
+}
+#pills-photo-tab,
+#pills-vote-tab {
+  border-right: #707070 1px solid;
 }
 .iconImg {
   margin-right: 9px;
   color: #ffffff;
   filter: invert(100%) sepia(96%) hue-rotate(74deg) brightness(104%)
     contrast(104%);
-}
-#present {
-  background-color: #ff8836;
-}
-.typeTab {
-  width: 303px;
-  display: flex;
-  justify-content: space-between;
 }
 /*   upload pic   */
 .upPicImg {
@@ -131,7 +139,7 @@ body {
   height: 100%;
   display: none;
 }
-.picture {
+.orangebox {
   width: 303px;
   height: 365px;
   border: #ff8836 3px solid;
@@ -224,13 +232,47 @@ body {
 .undo {
   margin-right: 12px;
 }
-.rotateR {
+.rotateR,
+.done {
   margin-right: auto;
 }
 .editBtn {
-  width: 182px;
+  width: 239px;
   display: none;
   justify-content: space-between;
   position: absolute;
   top: 310px;
+}
+.toggle {
+  width: 36px;
+  height: 21px;
+  background-color: #ffffff;
+  border: #ff8836 1px solid;
+  border-radius: 20px;
+  padding: 4px 3px;
+  cursor: pointer;
+  display: none;
+  justify-content: flex-end;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.toggle.active {
+  border: #000000 1px solid;
+  justify-content: flex-start;
+}
+.toggleBtn {
+  width: 12px;
+  height: 12px;
+  background-color: #ff8836;
+  border: none;
+  border-radius: 50%;
+}
+.toggle.active .toggleBtn {
+  background-color: #000000;
+}
+.toggle .voteTxt {
+  font-size: 14px;
+  text-align: center;
+  color: #adafb3;
 }

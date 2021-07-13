@@ -18,68 +18,99 @@
   </header>
   <section class="info">
     <div class="parti user">
-      <span class="txt name">김이름</span>
-      <span class="txt mail">participant@gmail.com</span>
+      <span class="name">김이름</span>
+      <span class="mail">participant@gmail.com</span>
       <button class="logoutBtn">로그아웃</button>
     </div>
     <div class="cordi user">
-      <span class="txt name">진행자</span>
-      <span class="txt mail">cordi@gmail.com</span>
+      <span class="name">진행자</span>
+      <span class="mail">cordi@gmail.com</span>
     </div>
   </section>
-  <section class="typeTab">
-    <button class="tabBtn" id="present">
-      <img class="iconImg" src="img/camera.svg" alt="" width="20px" height="18px">
-      <span>사진</span>
-    </button>
-    <button class="tabBtn">
-      <img class="iconImg" src="img/photo-video.svg" alt="" width="21px" height="16.8px">
-      <span>투표</span>
-    </button>
-    <button class="tabBtn">
-      <img class="iconImg" src="img/photo-video.svg" alt="" width="21px" height="16.8px">
-      <span>보기</span>
-    </button>
+  <section class="typeTab" width="303px">
+    <ul class="nav nav-pills" id="pills-tab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="tabBtn nav-link active" id="pills-photo-tab" data-bs-toggle="pill" data-bs-target="#pills-photo" 
+        type="button" role="tab" aria-controls="pills-photo" aria-selected="true">
+          <img class="iconImg" src="img/camera.svg" alt="" width="20px" height="18px">
+          <span>사진</span>
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="tabBtn nav-link" id="pills-vote-tab" data-bs-toggle="pill" data-bs-target="#pills-vote" 
+        type="button" role="tab" aria-controls="pills-vote" aria-selected="false">
+          <img class="iconImg" src="img/photo-video.svg" alt="" width="21px" height="16.8px">
+          <span>투표</span>
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="tabBtn nav-link" id="pills-show-tab" data-bs-toggle="pill" data-bs-target="#pills-show" 
+        type="button" role="tab" aria-controls="pills-show" aria-selected="false">
+          <img class="iconImg" src="img/photo-video.svg" alt="" width="21px" height="16.8px">
+          <span>보기</span>
+        </button>
+      </li>
+    </ul>
   </section>
-  <section>
-    <section class="picture">
-      <div class="upPicBox">
-        <label class="upPicLabel" for="uploadPicture">
-          <img class="upPicImg" src="img/camera.svg" alt="">
-          <div class="upTxt">사진 업로드 하기</div>
-        </label>
-        <input class="d-none" type="file" name="uploadPicture" id="uploadPicture" 
-        accept="image/*, ;capture=camera" onchange="load_image(this)">
-      </div>
-      <div class="showPic"></div>
-      <div class="result"></div>
-      <div class="editBtn">
-        <button class="rotate rotateL">
-          <img src="img/left_rotate.svg" alt="" onclick="rotateLeft()">
+  <div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane show active" id="pills-photo" role="tabpanel" aria-labelledby="pills-photo-tab">
+      <section class="orangebox picture">
+        <div class="upPicBox">
+          <label class="upPicLabel" for="uploadPicture">
+            <img class="upPicImg" src="img/camera.svg" alt="">
+            <div class="upTxt">사진 업로드 하기</div>
+          </label>
+          <input class="d-none" type="file" name="uploadPicture" id="uploadPicture" 
+          accept="image/*, ;capture=camera" onchange="load_image(this)">
+        </div>
+        <div class="showPic"></div>
+        <div class="result"></div>
+        <div class="toggle" id="enable" onclick="toggle_cropper(this)">
+          <button class="toggleBtn"></button>
+        </div>
+        <div class="editBtn">
+          <button class="rotate rotateL">
+            <img src="img/left_rotate.svg" alt="" onclick="rotateLeft()">
+          </button>
+          <button class="rotate rotateR">
+            <img src="img/right_rotate.svg" alt="" onclick="rotateRight()">
+          </button>
+          <button class="do undo">
+            <img src="img/undo_button.svg" alt="" onclick="undo()">
+          </button>
+          <button class="do done">
+            <img src="img/check_button.svg" alt="" onclick="get_image()">
+          </button>
+          <button class="cancel">
+            <img src="img/X_icon.svg" alt="" onclick="cancelUpload()">
+          </button>
+        </div>
+      </section>
+      <section class="option">
+        <input id="msgBox" class="msgBox" type="text" placeholder="최대 30자 메시지 입력">
+      </section>
+      <section class="option">
+        <button class="sendBtn" onclick="upload_image()">
+          <img class="sendIcon" src="img/send_icon.png" alt="" width="20.65px" height="21px">
+          <span>보내기</span>
         </button>
-        <button class="rotate rotateR">
-          <img src="img/right_rotate.svg" alt="" onclick="rotateRight()">
-        </button>
-        <button class="do undo">
-          <img src="img/undo_button.svg" alt="" onclick="undo()">
-        </button>
-        <button class="do done">
-          <img src="img/check_button.svg" alt="" onclick="get_image()">
-        </button>
-      </div>
-    </section>
-    <section class="option">
-      <input id="msgBox" class="msgBox" type="text" placeholder="최대 30자 메시지 입력">
-    </section>
-    <section class="option">
-      <button class="sendBtn" onclick="upload_image()">
-        <img class="sendIcon" src="img/send_icon.png" alt="" width="20.65px" height="21px">
-        <span>보내기</span>
-      </button>
-    </section>
-  </section>
-  
+      </section>
+    </div>
+    <div class="tab-pane" id="pills-vote" role="tabpanel" aria-labelledby="pills-vote-tab">
+      <section class="orangebox">
 
+      </section>
+    </div>
+    <div class="tab-pane" id="pills-show" role="tabpanel" aria-labelledby="pills-show-tab">
+      <section class="orangebox">
+        <span class="voteTxt">
+          진행자가 사진을 공유하면
+          <br>
+          이 화면에서 볼 수 있습니다.
+        </span>
+      </section>
+    </div>
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
