@@ -121,7 +121,7 @@ function edit_image(){
   const image = document.getElementById('newPic');
   cropper = new Cropper(image, {
     viewMode: 0,
-    dragMode: 'none',
+    dragMode: 'move',
     aspectRatio: 16 / 9,
     center: false,
     highlight: false,
