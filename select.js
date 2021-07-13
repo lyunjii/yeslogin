@@ -131,12 +131,16 @@ function edit_image(){
   });
 }
 
+var commands = [];
+
 function rotateLeft(){
   cropper.rotate(-90);
+  commands.push("rotate_L");
 }
 
 function rotateRight(){
   cropper.rotate(90);
+  commands.push("rotate_R");
 }
 
 var newCanvas = null;
@@ -161,14 +165,36 @@ function get_image(){
     });
     }
 
-    var container = result;
-    container.appendChild(newCanvas);
+    result.appendChild(newCanvas);
     
-    container.style.display = "flex";
-    container.style.alignItems = "center";
+    result.style.display = "flex";
+    result.style.alignItems = "center";
     showPic.style.display = "none";
 
     btnDisable = true;
+    commands.push("done");
+  }
+}
+
+function undo(){
+  var lastCommand = commands.pop();
+  if(!lastCommand) return;
+  switch(lastCommand){
+    case "rotate_L":
+      cropper.rotate(90);
+      break;
+    case "rotate_R":
+      cropper.rotate(-90);
+      break;
+    case "done":
+      showPic.style.display = "block";
+      result.style.display = "none";
+      while (result.firstChild) {
+        result.removeChild(result.firstChild);
+      }
+      newCanvas = null;
+      btnDisable = false;
+      break;
   }
 }
 
@@ -207,4 +233,5 @@ function upload_image(){
   newCanvas = null;
   msgBox.value='';
   btnDisable = false;
+  commands = [];
 }
