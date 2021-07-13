@@ -194,7 +194,7 @@ body {
   border-bottom: none;
 }
 .cropper-view-box {
-  outline: none;
+  outline-color: #ff8836;
 }
 .cropper-line {
   background: none;
