@@ -120,7 +120,7 @@ var cropper;
 function edit_image(){
   const image = document.getElementById('newPic');
   cropper = new Cropper(image, {
-    viewMode: 2,
+    viewMode: 0,
     dragMode: 'none',
     aspectRatio: 16 / 9,
     center: false,
