@@ -145,16 +145,18 @@ var btnDisable = false; //크롭 확인 버튼 비활성화
 
 //토글버튼 이미지로 수정해야함
 function toggle_cropper(toggleBtn){
-  toggle.classList.toggle('active');
+  //toggle.classList.toggle('active');
   if(toggleBtn.id === 'enable'){
     cropper.clear();
     btnDisable = true;
     toggleBtn.id = 'disable';
+    toggleBtn.src = "img/toggle_off.svg";
   }
   else{
     cropper.crop();
     btnDisable = false;
     toggleBtn.id = 'enable';
+    toggleBtn.src = "img/toggle_on.svg";
   }
 }
 
