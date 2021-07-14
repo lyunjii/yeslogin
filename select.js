@@ -141,17 +141,23 @@ var btnDisable = false; //크롭 확인 버튼 비활성화
 
 function toggle_cropper(){
   if(toggleBtn.getAttribute('value') === 'enable'){
-    cropper.clear();
-    btnDisable = true;
-    toggleBtn.setAttribute('value', 'disable');
-    toggleBtn.setAttribute('src', 'img/toggle_off.svg');
+    toggle_set();
   }
   else{
-    cropper.crop();
-    btnDisable = false;
-    toggleBtn.setAttribute('value', 'enable');
-    toggleBtn.setAttribute('src', 'img/toggle_on.svg');
+    toggle_reset();
   }
+}
+function toggle_reset(){
+  cropper.crop();
+  btnDisable = false;
+  toggleBtn.setAttribute('value', 'enable');
+  toggleBtn.setAttribute('src', 'img/toggle_on.svg');
+}
+function toggle_set(){
+  cropper.clear();
+  btnDisable = true;
+  toggleBtn.setAttribute('value', 'disable');
+  toggleBtn.setAttribute('src', 'img/toggle_off.svg');
 }
 
 function rotateLeft(){
@@ -164,34 +170,31 @@ function rotateRight(){
   commands.push("rotate_R");
 }
 
-function get_image_canvas(){
-  newCanvas = null;
-  newCanvas = document.createElement("canvas");
-  newCanvas.setAttribute("id", 'newCanvas');
-
-  if(is_mobile()){
-    newCanvas = cropper.getCroppedCanvas({
-      width: 297,
-      height: 359
-    });
-  }
-  else{
-    newCanvas = cropper.getCroppedCanvas({
-    width: 594,
-    height: 541
-  });
-  }
-  
-  result.appendChild(newCanvas);
-  result.style.display = "flex";
-  result.style.alignItems = "center";
-  showPic.style.display = "none";
-}
-
 function get_image(){
   if(btnDisable){return;}
   else{
-    get_image_canvas();
+    newCanvas = null;
+    newCanvas = document.createElement("canvas");
+    newCanvas.setAttribute("id", 'newCanvas');
+
+    if(is_mobile()){
+      newCanvas = cropper.getCroppedCanvas({
+        width: 297,
+        height: 359
+      });
+    }
+    else{
+      newCanvas = cropper.getCroppedCanvas({
+      width: 594,
+      height: 541
+    });
+    }
+    
+    result.appendChild(newCanvas);
+
+    result.style.display = "flex";
+    result.style.alignItems = "center";
+    showPic.style.display = "none";
     toggle.style.display = "none";
     btnDisable = true;
     commands.push("done");
@@ -248,6 +251,30 @@ function cancelUpload(){
 }
 
 function upload_image(){
+  //추출그리드 off인 경우... 코드가 그지같다...
+  if(toggleBtn.getAttribute('value') == 'disable'){
+    // newCanvas = null;
+    // newCanvas = document.createElement("canvas");
+    // newCanvas.setAttribute("id", 'newCanvas');
+
+    // var ctx = newCanvas.getContext('2d');
+    // var targetImage = document.querySelector('.cropper-container img');
+    
+    // ctx.drawImage(targetImage, 0, 0);
+    
+    //newCanvas = document.querySelector('.cropper-container img');
+    newCanvas = document.querySelector('#newPic');
+    newCanvas.classList.remove('cropper-hidden');
+
+    result.appendChild(newCanvas);
+
+    result.style.display = "flex";
+    result.style.alignItems = "center";
+    result.style.justifyContent = "center";
+    showPic.style.display = "none";
+    toggle.style.display = "none";
+    toggleBtn.setAttribute('value', 'enable');
+  }
   //영역을 선택하지 않았을 때
   if(newCanvas == null){
     alert("영역을 선택하세요");
@@ -286,4 +313,5 @@ function upload_image(){
   msgBox.value='';
   btnDisable = false;
   commands = [];
+  toggle_reset();
 }
