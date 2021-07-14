@@ -249,13 +249,10 @@ body {
   position: absolute;
   top: 10px;
   right: 10px;
+  cursor: pointer;
 }
-.toggleBtn {
-  width: 36px;
-  height: 21px;
-  background: none;
-  border: none;
-}
+/*   vote   */
+
 /*   show text   */
 .showTxt {
   font-size: 14px;
