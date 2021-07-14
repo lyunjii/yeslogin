@@ -271,7 +271,7 @@ body {
 .toggle.active .toggleBtn {
   background-color: #000000;
 }
-.toggle .voteTxt {
+.showTxt {
   font-size: 14px;
   text-align: center;
   color: #adafb3;
