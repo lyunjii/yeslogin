@@ -224,30 +224,36 @@ function undo(){
   }
 }
 
-function cancelUpload(){
-  cropper.destroy();
+function reset_image_box(){
+  //편집 버튼, 이미지창, 메시지칸, 확인버튼 안보이도록
+  editBtn.style.display = "none";
+  result.style.display = "none";
+  var opt = document.getElementsByClassName('option');
+  for(var i = 0; i < opt.length; i++){
+    opt[i].style.display = "none";
+  }
+  //업로드 박스 다시 보이도록
+  upPicBox.style.display = "block";
+  picture.style.marginBottom = "30px";
+  //이전 이미지 지우고 메시지, 명령배열 등 초기화
   while (showPic.firstChild) {
     showPic.removeChild(showPic.firstChild);
   }
   while (result.firstChild) {
     result.removeChild(result.firstChild);
   }  
-  //편집 버튼, 이미지창, 메시지칸, 확인버튼 안보이도록
-  editBtn.style.display = "none";
-  toggle.style.display = "none";
-  showPic.style.display = "none";
-  result.style.display = "none";
-  var opt = document.getElementsByClassName('option');
-  for(var i = 0; i < opt.length; i++){
-    opt[i].style.display = "none";
-  }
   newCanvas = null;
   msgBox.value='';
   btnDisable = false;
   commands = [];
-  //업로드 박스 다시 보이도록
-  upPicBox.style.display = "block";
-  picture.style.marginBottom = "30px";
+  toggle_reset();
+}
+
+function cancelUpload(){
+  cropper.destroy();
+  toggle.style.display = "none";
+  showPic.style.display = "none";
+  reset_image_box();
 }
 
 function upload_image(){
@@ -291,27 +297,5 @@ function upload_image(){
   console.log(newCanvas);
   //parent.sunny.uploadToGD_base64(newCanvas.toDataURL("image/PNG",1),msg,);
 
-  //편집 버튼, 이미지창, 메시지칸, 확인버튼 안보이도록
-  editBtn.style.display = "none";
-  result.style.display = "none";
-  var opt = document.getElementsByClassName('option');
-  for(var i = 0; i < opt.length; i++){
-    opt[i].style.display = "none";
-  }
-  //업로드 박스 다시 보이도록
-  upPicBox.style.display = "block";
-  picture.style.marginBottom = "30px";
-
-  //이전 이미지 지우고 메시지, 명령배열 초기화
-  while (showPic.firstChild) {
-    showPic.removeChild(showPic.firstChild);
-  }
-  while (result.firstChild) {
-    result.removeChild(result.firstChild);
-  }  
-  newCanvas = null;
-  msgBox.value='';
-  btnDisable = false;
-  commands = [];
-  toggle_reset();
+  reset_image_box();
 }
