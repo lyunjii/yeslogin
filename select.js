@@ -25,9 +25,11 @@ window.onload = function (){
 
     document.querySelector('.typeTab').style.width = "600px";
 
-    var picture = document.querySelector('.picture');
-    picture.style.width = "600px";
-    picture.style.height = "547px";
+    var orangebox = document.getElementsByClassName('orangebox');
+    for(var i = 0; i < orangebox.length; i++){
+      orangebox[i].style.width = "600px";
+      orangebox[i].style.height = "547px";
+    }
 
     document.querySelector('.upTxt').style.marginTop = "12px";
 
@@ -69,26 +71,7 @@ function is_mobile()
   if(iOSios)
     return true;
 
-
-
-
-
-
-
-
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//여기 값 바뀌어있음 고쳐서 푸시!!!!!!!!!!!!!
-  return true;    
-
-
-
-
-
-
-
-
-
-
+  return false;    
 }
 
 var picture = document.querySelector('.picture');
