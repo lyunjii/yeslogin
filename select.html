@@ -65,25 +65,13 @@
         </div>
         <div class="showPic"></div>
         <div class="result"></div>
-        <div class="toggle">
-          <img src="img/toggle_on.svg" alt="" id="toggleBtn" value="enable" onclick="toggle_cropper()" width="36px" height="21px">
-        </div>
         <div class="editBtn">
-          <button class="rotate rotateL">
-            <img src="img/left_rotate.svg" alt="" onclick="rotateLeft()">
-          </button>
-          <button class="rotate rotateR">
-            <img src="img/right_rotate.svg" alt="" onclick="rotateRight()">
-          </button>
-          <button class="do undo">
-            <img src="img/undo_button.svg" alt="" onclick="undo()">
-          </button>
-          <button class="do done">
-            <img src="img/check_button.svg" alt="" onclick="get_image()">
-          </button>
-          <button class="cancel">
-            <img src="img/X_icon.svg" alt="" onclick="cancelUpload()">
-          </button>
+          <img src="img/X_icon.svg" alt="" onclick="cancelUpload()">
+          <img id="toggleBtn" src="img/toggle_grid_on@3x.png" alt="" value="on" onclick="toggle_cropper()">
+          <img src="img/left_rotate.svg" alt="" onclick="rotateLeft()">
+          <img src="img/right_rotate.svg" alt="" onclick="rotateRight()">
+          <img src="img/undo_button.svg" alt="" onclick="undo()">
+          <img src="img/check_button.svg" alt="" onclick="get_image()">
         </div>
       </section>
       <section class="option">

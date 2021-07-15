@@ -78,10 +78,10 @@ var upPicBox = document.querySelector('.upPicBox');
 var showPic = document.querySelector('.showPic');
 var result = document.querySelector('.result');
 var editBtn = document.querySelector('.editBtn');
-var toggle = document.querySelector('.toggle');
 var toggleBtn = document.querySelector('#toggleBtn')
 var msgBox = document.querySelector('.msgBox');
 var original_image_file = null;
+
 function load_image(input){
   if(!input.files[0]) return;
   else{
@@ -114,8 +114,7 @@ function load_image(input){
     edit_image();
 
     editBtn.style.display = "flex";
-    toggle.style.display = "flex";
-    if(!is_mobile()){ editBtn.style.top = "487px"; }
+    if(!is_mobile()){ editBtn.style.top = "502px"; }
   }
 }
 
@@ -141,7 +140,7 @@ var newCanvas = null; //자른 이미지 놓을 canvas
 var btnDisable = false; //크롭 확인 버튼 비활성화
 
 function toggle_cropper(){
-  if(toggleBtn.getAttribute('value') === 'enable'){
+  if(toggleBtn.getAttribute('value') === 'on'){
     toggle_set();
   }
   else{
@@ -151,14 +150,14 @@ function toggle_cropper(){
 function toggle_reset(){
   cropper.crop();
   btnDisable = false;
-  toggleBtn.setAttribute('value', 'enable');
-  toggleBtn.setAttribute('src', 'img/toggle_on.svg');
+  toggleBtn.setAttribute('value', 'on');
+  toggleBtn.setAttribute('src', 'img/toggle_grid_on@3x.png');
 }
 function toggle_set(){
   cropper.clear();
   btnDisable = true;
-  toggleBtn.setAttribute('value', 'disable');
-  toggleBtn.setAttribute('src', 'img/toggle_off.svg');
+  toggleBtn.setAttribute('value', 'off');
+  toggleBtn.setAttribute('src', 'img/toggle_grid_off@3x.png');
 }
 
 function rotateLeft(){
@@ -196,7 +195,6 @@ function get_image(){
     result.style.display = "flex";
     result.style.alignItems = "center";
     showPic.style.display = "none";
-    toggle.style.display = "none";
     btnDisable = true;
     commands.push("done");
   }
@@ -214,7 +212,6 @@ function undo(){
       break;
     case "done":
       showPic.style.display = "block";
-      toggle.style.display = "flex";
       result.style.display = "none";
       while (result.firstChild) {
         result.removeChild(result.firstChild);
@@ -252,14 +249,13 @@ function reset_image_box(){
 
 function cancelUpload(){
   cropper.destroy();
-  toggle.style.display = "none";
   showPic.style.display = "none";
   reset_image_box();
 }
 
 function upload_image(){
   //추출그리드 off인 경우
-  if(toggleBtn.getAttribute('value') == 'disable'){
+  if(toggleBtn.getAttribute('value') == 'off'){
     // newCanvas = null;
     // newCanvas = document.createElement("canvas");
     // newCanvas.setAttribute("id", 'newCanvas');
@@ -279,8 +275,7 @@ function upload_image(){
     result.style.alignItems = "center";
     result.style.justifyContent = "center";
     showPic.style.display = "none";
-    toggle.style.display = "none";
-    toggleBtn.setAttribute('value', 'enable');
+    toggleBtn.setAttribute('value', 'on');
   }
   //영역을 선택하지 않았을 때
   if(newCanvas == null){
@@ -294,7 +289,7 @@ function upload_image(){
     alert("메시지를 입력하세요");
     return;
   }
-
+/*
   try{
     if(!btnDisable)
       parent.sunny.uploadToGD_base64(newCanvas.toDataURL("image/PNG",1),msg);
@@ -316,7 +311,7 @@ function upload_image(){
   {
 
   }
-  
+*/  
   //parent.sunny.uploadToGD_base64(newCanvas.toDataURL("image/PNG",1),msg,);
 
   reset_image_box();
