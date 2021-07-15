@@ -18,13 +18,13 @@
   </header>
   <section class="info">
     <div class="parti user">
-      <span class="name">김이름</span>
-      <span class="mail">participant@gmail.com</span>
+      <span class="name" id="parti_name">김이름</span>
+      <span class="mail" id="parti_email">participant@gmail.com</span>
       <button class="logoutBtn">로그아웃</button>
     </div>
     <div class="cordi user">
       <span class="name">진행자</span>
-      <span class="mail">cordi@gmail.com</span>
+      <span class="mail" id=coordi_email>cordi@gmail.com</span>
     </div>
   </section>
   <section class="typeTab" width="303px">
@@ -131,5 +131,10 @@
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.js" integrity="sha512-ZK6m9vADamSl5fxBPtXw6ho6A4TuX89HUbcfvxa2v2NYNT/7l8yFGJ3JlXyMN4hlNbz0il4k6DvqbIW5CCwqkw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="select.js" async defer></script>
+
+  <canvas id="Canvas1"   width="1920" height="1080" style="border:1px solid;display: none;">
+  </canvas>
+  <canvas id="Canvas2"   width="1920" height="1080" style="border:1px solid;display: none;">
+  </canvas>
 </body>
 </html>

@@ -81,7 +81,7 @@ var editBtn = document.querySelector('.editBtn');
 var toggle = document.querySelector('.toggle');
 var toggleBtn = document.querySelector('#toggleBtn')
 var msgBox = document.querySelector('.msgBox');
-
+var original_image_file = null;
 function load_image(input){
   if(!input.files[0]) return;
   else{
@@ -91,6 +91,7 @@ function load_image(input){
     newImage.setAttribute("id", 'newPic');
 
     var file = input.files[0];
+    original_image_file = file;
     newImage.src = URL.createObjectURL(file);
 
     showPic.appendChild(newImage);
@@ -257,7 +258,7 @@ function cancelUpload(){
 }
 
 function upload_image(){
-  //추출그리드 off인 경우... 코드가 그지같다...
+  //추출그리드 off인 경우
   if(toggleBtn.getAttribute('value') == 'disable'){
     // newCanvas = null;
     // newCanvas = document.createElement("canvas");
@@ -294,7 +295,28 @@ function upload_image(){
     return;
   }
 
-  console.log(newCanvas);
+  try{
+    if(!btnDisable)
+      parent.sunny.uploadToGD_base64(newCanvas.toDataURL("image/PNG",1),msg);
+    else
+    {
+
+      parent. document.getElementById("sunny_spinner").classList.remove("d-none");
+      {
+        parent.sunny.send_orginal_image_v2("audience_photo",original_image_file,"Canvas1","Canvas2",msg,function(rst){
+        });
+      
+      }
+      
+      
+
+    }
+  }
+  catch(err)
+  {
+
+  }
+  
   //parent.sunny.uploadToGD_base64(newCanvas.toDataURL("image/PNG",1),msg,);
 
   reset_image_box();
