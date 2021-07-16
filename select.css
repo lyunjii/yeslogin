@@ -241,7 +241,69 @@ ul {
   top: 320px;
 }
 /*   vote   */
-
+.voteImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 9px 9px 0px 0px;
+}
+.voteImage {
+  width: 282px;
+  height: 160px;
+}
+.image_user {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  margin-right: 7px;
+}
+.image_comment {
+  font-size: 12px;
+  font-weight: lighter;
+}
+.image_name {
+  font-size: 10px;
+  font-weight: lighter;
+}
+.imageInfo {
+  display: flex;
+  align-items: center;
+  padding: 5px 6px;
+  border-top: #707070 1px solid;
+}
+.form-check-input[type="checkbox"] {
+  position: absolute;
+  top: 7px;
+  left: 8.5px;
+  width: 15px;
+  height: 15px;
+  border: #707070 1px solid;
+  border-radius: 2px;
+  margin: 0px;
+}
+.form-check-input[type="checkbox"]:checked {
+  background-color: #ff8836;
+  border-color: #ff8836;
+}
+.voteElement {
+  width: 284px;
+  height: 208px;
+  border: #707070 1px solid;
+  border-radius: 10px;
+  position: relative;
+  margin: 5px;
+}
+.voteList {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  display: flex;
+  justify-content: center;
+  flex-flow: wrap;
+}
+.voteList::-webkit-scrollbar {
+  display: none;
+}
 /*   show text   */
 .showTxt {
   font-size: 14px;
