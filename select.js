@@ -123,7 +123,7 @@ var cropper;
 function edit_image(){
   const image = document.getElementById('newPic');
   cropper = new Cropper(image, {
-    viewMode: 0, //이미지 창 크기보다 작게 축소 가능
+    viewMode: 1,
     dragMode: 'move', //cropper 바깥에서 마우스로 사진 이동
     aspectRatio: 16 / 9, //cropper 비율
     //중앙 표시, 그리드부분 밝게, 배경 체크무늬 없게
