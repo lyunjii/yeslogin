@@ -1,4 +1,5 @@
 window.onload = function (){
+  
   if(!is_mobile()){
     var logo = document.querySelector('.logo');
     logo.style.width = "258px";
@@ -83,6 +84,22 @@ var msgBox = document.querySelector('.msgBox');
 var original_image_file = null;
 
 function load_image(input){
+  
+
+  
+  if(parent.sunny == null  || !parent.sunny.is_ready_for_everything())
+  {
+    alert("not ready yet");
+    return;
+  }
+  
+  if(!parent.sunny.is_coordinator_collecting())
+  {
+    alert("coordinator is not collecting image or video");
+    return;
+
+  }
+
   if(!input.files[0]) return;
   else{
     upPicBox.style.display = "none";
@@ -255,6 +272,77 @@ function cancelUpload(){
 
 function upload_image(){
   //추출그리드 off인 경우
+    
+  var msg = msgBox.value.trim();
+  console.log(msg);
+  if(msg == null || msg == ""){
+    alert("메시지를 입력하세요");
+    return;
+  }
+
+  try{
+    if(toggleBtn.getAttribute('value') == 'on')
+    {
+        //영역을 선택하지 않았을 때
+        if(newCanvas == null){
+          alert("영역을 선택하세요");
+          return;
+        }
+
+        
+        var thumbnailCanvas = document.getElementById("thumbnail");
+        var tbumbnailContext = thumbnailCanvas.getContext("2d");
+  
+        thumbnailCanvas.width = "343";
+        thumbnailCanvas.height = "191";
+        tbumbnailContext.clearRect(0, 0, thumbnailCanvas.width, thumbnailCanvas.height);
+  
+        
+        tbumbnailContext.drawImage(newCanvas, 0, 0, 343, 191);
+        var thumbnailData = thumbnailCanvas.toDataURL("image/jpeg",0.7);
+
+
+      //parent.sunny.uploadToGD_base64(newCanvas.toDataURL("image/PNG",1),msg,thumbnailData);
+      parent.sunny.uploadToGD_base64(thumbnailData,msg,newCanvas.toDataURL("image/PNG",1),"image");
+    }
+      
+    else
+    {
+
+      //parent. document.getElementById("sunny_spinner").classList.remove("d-none");
+      {
+        
+        parent.sunny.send_orginal_image_v2("audience_photo",original_image_file,"Canvas1","Canvas2",msg,function(org_canvas){
+
+          var thumbnailCanvas = document.getElementById("thumbnail");
+          var tbumbnailContext = thumbnailCanvas.getContext("2d");
+    
+          thumbnailCanvas.width = "343";
+          thumbnailCanvas.height = "191";
+          tbumbnailContext.clearRect(0, 0, thumbnailCanvas.width, thumbnailCanvas.height);
+          
+          
+          tbumbnailContext.drawImage(org_canvas, 0, 0, 343, 191);
+          var thumbnailData = thumbnailCanvas.toDataURL("image/jpeg",0.7);
+          //console.log(thumbnailData);
+
+          
+          parent.sunny.uploadToGD_base64(thumbnailData,msg,org_canvas.toDataURL("image/PNG",1),"image");
+        });
+      
+      }
+      
+      
+
+    }
+  }
+  catch(err)
+  {
+
+    console.log(err.message);
+  }
+  
+
   if(toggleBtn.getAttribute('value') == 'off'){
     // newCanvas = null;
     // newCanvas = document.createElement("canvas");
@@ -277,42 +365,5 @@ function upload_image(){
     showPic.style.display = "none";
     toggleBtn.setAttribute('value', 'on');
   }
-  //영역을 선택하지 않았을 때
-  if(newCanvas == null){
-    alert("영역을 선택하세요");
-    return;
-  }
-  //메시지를 입력하지 않았을 때
-  var msg = msgBox.value.trim();
-  console.log(msg);
-  if(msg == null || msg == ""){
-    alert("메시지를 입력하세요");
-    return;
-  }
-/*
-  try{
-    if(!btnDisable)
-      parent.sunny.uploadToGD_base64(newCanvas.toDataURL("image/PNG",1),msg);
-    else
-    {
-
-      parent. document.getElementById("sunny_spinner").classList.remove("d-none");
-      {
-        parent.sunny.send_orginal_image_v2("audience_photo",original_image_file,"Canvas1","Canvas2",msg,function(rst){
-        });
-      
-      }
-      
-      
-
-    }
-  }
-  catch(err)
-  {
-
-  }
-*/  
-  //parent.sunny.uploadToGD_base64(newCanvas.toDataURL("image/PNG",1),msg,);
-
   reset_image_box();
 }
