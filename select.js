@@ -84,9 +84,7 @@ var msgBox = document.querySelector('.msgBox');
 var original_image_file = null;
 
 function load_image(input){
-  
-
-  
+/*
   if(parent.sunny == null  || !parent.sunny.is_ready_for_everything())
   {
     alert("not ready yet");
@@ -99,7 +97,7 @@ function load_image(input){
     return;
 
   }
-
+*/
   if(!input.files[0]) return;
   else{
     upPicBox.style.display = "none";
@@ -271,7 +269,6 @@ function cancelUpload(){
 }
 
 function upload_image(){
-  //추출그리드 off인 경우
     
   var msg = msgBox.value.trim();
   console.log(msg);
@@ -338,32 +335,8 @@ function upload_image(){
   }
   catch(err)
   {
-
     console.log(err.message);
   }
   
-
-  if(toggleBtn.getAttribute('value') == 'off'){
-    // newCanvas = null;
-    // newCanvas = document.createElement("canvas");
-    // newCanvas.setAttribute("id", 'newCanvas');
-
-    // var ctx = newCanvas.getContext('2d');
-    // var targetImage = document.querySelector('.cropper-container img');
-    
-    // ctx.drawImage(targetImage, 0, 0);
-    
-    //newCanvas = document.querySelector('.cropper-container img');
-    newCanvas = document.querySelector('#newPic');
-    newCanvas.classList.remove('cropper-hidden');
-
-    result.appendChild(newCanvas);
-
-    result.style.display = "flex";
-    result.style.alignItems = "center";
-    result.style.justifyContent = "center";
-    showPic.style.display = "none";
-    toggleBtn.setAttribute('value', 'on');
-  }
   reset_image_box();
 }
