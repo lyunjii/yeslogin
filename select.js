@@ -82,9 +82,10 @@ var editBtn = document.querySelector('.editBtn');
 var toggleBtn = document.querySelector('#toggleBtn')
 var msgBox = document.querySelector('.msgBox');
 var original_image_file = null;
+var imageWidth = imageHeight = 0;
 
 function load_image(input){
-/*
+  /*
   if(parent.sunny == null  || !parent.sunny.is_ready_for_everything())
   {
     alert("not ready yet");
@@ -108,6 +109,18 @@ function load_image(input){
     var file = input.files[0];
     original_image_file = file;
     newImage.src = URL.createObjectURL(file);
+
+    var fileReader = new FileReader();
+    fileReader.onload = function(e){
+      console.log(e.target.result);
+      var tmp = new Image();
+      tmp.src = e.target.result;
+      tmp.onload = function(){
+        imageWidth = this.width;
+        imageHeight = this.height;
+        return true;
+      };
+    }
 
     showPic.appendChild(newImage);
 
@@ -141,7 +154,7 @@ function edit_image(){
     viewMode: 1,
     dragMode: 'move', //cropper 바깥에서 마우스로 사진 이동
     aspectRatio: 16 / 9, //cropper 비율
-    //중앙 표시, 그리드부분 밝게, 배경 체크무늬 없게
+    //(중앙 표시, 그리드부분 밝게, 배경 체크무늬) 없게
     center: false,
     highlight: false,
     background: false,
@@ -151,6 +164,7 @@ function edit_image(){
 }
 
 var commands = [];  //버튼 명령을 저장하는 배열
+var rotateCount = 0;
 var newCanvas = null; //자른 이미지 놓을 canvas
 var btnDisable = false; //크롭 확인 버튼 비활성화
 
@@ -178,11 +192,13 @@ function toggle_set(){
 function rotateLeft(){
   cropper.rotate(-90);
   commands.push("rotate_L");
+  rotateCount--;
 }
 
 function rotateRight(){
   cropper.rotate(90);
   commands.push("rotate_R");
+  rotateCount++;
 }
 
 function get_image(){
@@ -221,9 +237,11 @@ function undo(){
   switch(lastCommand){
     case "rotate_L":
       cropper.rotate(90);
+      rotateCount++;
       break;
     case "rotate_R":
       cropper.rotate(-90);
+      rotateCount--;
       break;
     case "done":
       showPic.style.display = "block";
@@ -235,6 +253,43 @@ function undo(){
       btnDisable = false;
       break;
   }
+}
+
+
+function rotateOriginal(){
+  var originalCanvas = document.createElement("canvas");
+  var originalContext = originalCanvas.getContext('2d');
+  var originalImage = new Image();
+  
+  originalImage.src = URL.createObjectURL(original_image_file);
+  originalImage.width = imageWidth;
+  originalImage.height = imageHeight;
+  
+  var rotate = rotateCount % 4;
+  if (rotate < 0) rotate += 4;
+
+  if(rotate == 0 || rotate == 2){
+    originalCanvas.width = originalImage.width;
+    originalCanvas.height = originalImage.height;
+    if(rotate == 2){
+      originalContext.rotate((Math.PI / 180) * 180);
+    }
+    originalContext.drawImage(originalImage, 0, 0);
+  }
+  else{
+    originalCanvas.width = originalImage.height;
+    originalCanvas.height = originalImage.width;
+    originalContext.translate(originalCanvas.width/2, originalCanvas.height/2);
+    
+    if(rotate == 1){
+      originalContext.rotate((Math.PI / 180) * 90);
+    }
+    else{
+      originalContext.rotate((Math.PI / 180) * 270);
+    }
+    originalContext.drawImage(originalImage, -(originalImage.width/2), -(originalImage.height/2));
+  }
+  return originalCanvas;
 }
 
 function reset_image_box(){
@@ -259,6 +314,7 @@ function reset_image_box(){
   msgBox.value='';
   btnDisable = false;
   commands = [];
+  rotateCount = 0;
   toggle_reset();
 }
 
@@ -277,7 +333,7 @@ function upload_image(){
     return;
   }
 
-  try{
+  //try{
     if(toggleBtn.getAttribute('value') == 'on')
     {
         //영역을 선택하지 않았을 때
@@ -306,9 +362,25 @@ function upload_image(){
     else
     {
 
-      //parent. document.getElementById("sunny_spinner").classList.remove("d-none");
-      {
+        var thumbnailCanvas = document.getElementById("thumbnail");
+        var tbumbnailContext = thumbnailCanvas.getContext("2d");
+  
+        thumbnailCanvas.width = "343";
+        thumbnailCanvas.height = "191";
+        tbumbnailContext.clearRect(0, 0, thumbnailCanvas.width, thumbnailCanvas.height);
+  
         
+        tbumbnailContext.drawImage(rotateOriginal(), 0, 0, 343, 191);
+        var thumbnailData = thumbnailCanvas.toDataURL("image/jpeg",0.7);
+
+
+      //parent.sunny.uploadToGD_base64(newCanvas.toDataURL("image/PNG",1),msg,thumbnailData);
+      parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image");
+
+      //parent. document.getElementById("sunny_spinner").classList.remove("d-none");
+      /*
+      {
+
         parent.sunny.send_orginal_image_v2("audience_photo",original_image_file,"Canvas1","Canvas2",msg,function(org_canvas){
 
           var thumbnailCanvas = document.getElementById("thumbnail");
@@ -326,17 +398,17 @@ function upload_image(){
           
           parent.sunny.uploadToGD_base64(thumbnailData,msg,org_canvas.toDataURL("image/PNG",1),"image");
         });
-      
+
       }
-      
+      */
       
 
     }
-  }
-  catch(err)
-  {
-    console.log(err.message);
-  }
+//  }
+//  catch(err)
+//  {
+//    console.log(err.message);
+//  }
   
   reset_image_box();
 }
