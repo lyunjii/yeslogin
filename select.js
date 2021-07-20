@@ -110,6 +110,17 @@ function load_image(input){
     original_image_file = file;
     newImage.src = URL.createObjectURL(file);
 
+    var fileReader = new FileReader();
+    fileReader.onload = function(e){
+      var tmp = new Image();
+      tmp.src = e.target.result;
+      tmp.onload = function(){
+        imageWidth = this.width;
+        imageHeight = this.height;
+      };
+    }
+    fileReader.readAsDataURL(file);
+
     showPic.appendChild(newImage);
 
     showPic.style.display = "block";
@@ -251,6 +262,7 @@ function rotateOriginal(){
   originalImage.src = URL.createObjectURL(original_image_file);
   originalImage.width = imageWidth;
   originalImage.height = imageHeight;
+  originalContext.clearRect(0, 0, imageWidth, imageHeight);
   
   var rotate = rotateCount % 4;
   if (rotate < 0) rotate += 4;
@@ -282,6 +294,7 @@ function rotateOriginal(){
 function reset_image_box(){
   //편집 버튼, 이미지창, 메시지칸, 확인버튼 안보이도록
   editBtn.style.display = "none";
+  showPic.style.display = "none";
   result.style.display = "none";
   var opt = document.getElementsByClassName('option');
   for(var i = 0; i < opt.length; i++){
@@ -307,7 +320,6 @@ function reset_image_box(){
 
 function cancelUpload(){
   cropper.destroy();
-  showPic.style.display = "none";
   reset_image_box();
 }
 
@@ -323,28 +335,27 @@ function upload_image(){
   try{
     if(toggleBtn.getAttribute('value') == 'on')
     {
-        //영역을 선택하지 않았을 때
-        if(newCanvas == null){
-          alert("영역을 선택하세요");
-          return;
-        }
+      //영역을 선택하지 않았을 때
+      if(newCanvas == null){
+        alert("영역을 선택하세요");
+        return;
+      }
+      
+      var thumbnailCanvas = document.getElementById("thumbnail");
+      var tbumbnailContext = thumbnailCanvas.getContext("2d");
 
-        
-        var thumbnailCanvas = document.getElementById("thumbnail");
-        var tbumbnailContext = thumbnailCanvas.getContext("2d");
-  
-        thumbnailCanvas.width = "343";
-        thumbnailCanvas.height = "191";
-        tbumbnailContext.clearRect(0, 0, thumbnailCanvas.width, thumbnailCanvas.height);
-  
-        
-        tbumbnailContext.drawImage(newCanvas, 0, 0, 343, 191);
-        var thumbnailData = thumbnailCanvas.toDataURL("image/jpeg",0.7);
+      thumbnailCanvas.width = "343";
+      thumbnailCanvas.height = "191";
+      tbumbnailContext.clearRect(0, 0, thumbnailCanvas.width, thumbnailCanvas.height);
 
-        var canvas = document.getElementById("Canvas2");
-        var canvasContext = canvas.getContext("2d");
-        canvasContext.clearRect(0, 0, canvas.width, canvas.height);
-        canvasContext.drawImage(newCanvas, 0, 0, canvas.width, canvas.height);
+      
+      tbumbnailContext.drawImage(newCanvas, 0, 0, 343, 191);
+      var thumbnailData = thumbnailCanvas.toDataURL("image/jpeg",0.7);
+
+      var canvas = document.getElementById("Canvas2");
+      var canvasContext = canvas.getContext("2d");
+      canvasContext.clearRect(0, 0, canvas.width, canvas.height);
+      canvasContext.drawImage(newCanvas, 0, 0, canvas.width, canvas.height);
 
       //parent.sunny.uploadToGD_base64(newCanvas.toDataURL("image/PNG",1),msg,thumbnailData);
       parent.sunny.uploadToGD_base64(thumbnailData,msg,canvas.toDataURL("image/PNG",1),"image");
@@ -352,37 +363,51 @@ function upload_image(){
       
     else
     {
+      //위 if문 안의 코드 참고해서 작성했습니다
+      //크롭이미지 캔버스 대신 회전시킨 원본을 그린 캔버스를 작성했습니다
+      var thumbnailCanvas = document.getElementById("thumbnail");
+      var tbumbnailContext = thumbnailCanvas.getContext("2d");
+
+      thumbnailCanvas.width = "343";
+      thumbnailCanvas.height = "191";
+      tbumbnailContext.clearRect(0, 0, thumbnailCanvas.width, thumbnailCanvas.height);
+
+      
+      tbumbnailContext.drawImage(rotateOriginal(), 0, 0, 343, 191);
+      var thumbnailData = thumbnailCanvas.toDataURL("image/jpeg",0.7);
+
+
+      parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image");
 
       //parent. document.getElementById("sunny_spinner").classList.remove("d-none");
+      /*
       {
-        
+
         parent.sunny.send_orginal_image_v2("audience_photo",original_image_file,"Canvas1","Canvas2",msg,function(org_canvas){
 
-          var thumbnailCanvas = document.getElementById("thumbnail");
-          var tbumbnailContext = thumbnailCanvas.getContext("2d");
-    
-          thumbnailCanvas.width = "343";
-          thumbnailCanvas.height = "191";
-          tbumbnailContext.clearRect(0, 0, thumbnailCanvas.width, thumbnailCanvas.height);
-          
-          
-          tbumbnailContext.drawImage(org_canvas, 0, 0, 343, 191);
-          var thumbnailData = thumbnailCanvas.toDataURL("image/jpeg",0.7);
-          //console.log(thumbnailData);
+        var thumbnailCanvas = document.getElementById("thumbnail");
+        var tbumbnailContext = thumbnailCanvas.getContext("2d");
+  
+        thumbnailCanvas.width = "343";
+        thumbnailCanvas.height = "191";
+        tbumbnailContext.clearRect(0, 0, thumbnailCanvas.width, thumbnailCanvas.height);
+        
+        
+        tbumbnailContext.drawImage(org_canvas, 0, 0, 343, 191);
+        var thumbnailData = thumbnailCanvas.toDataURL("image/jpeg",0.7);
+        //console.log(thumbnailData);
 
-          
-          parent.sunny.uploadToGD_base64(thumbnailData,msg,org_canvas.toDataURL("image/PNG",1),"image");
-        });
-      
-      }
-      
-      
+        
+        parent.sunny.uploadToGD_base64(thumbnailData,msg,org_canvas.toDataURL("image/PNG",1),"image");
+      });
 
     }
+    */
+    
+  }
   }
   catch(err)
   {
-
     console.log(err.message);
   }
 
