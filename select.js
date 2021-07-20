@@ -81,9 +81,17 @@ var result = document.querySelector('.result');
 var editBtn = document.querySelector('.editBtn');
 var toggleBtn = document.querySelector('#toggleBtn')
 var msgBox = document.querySelector('.msgBox');
+
+var cropper;
+
+var newCanvas = null; //자른 이미지 놓을 canvas
 var original_image_file = null;
 var original_src = null;
 var imageWidth = imageHeight = 0;
+
+var commands = [];  //버튼 명령을 저장하는 배열
+var rotateCount = 0;  //원본 이미지를 회전 정보
+var btnDisable = false; //크롭 확인 버튼 비활성화
 
 function load_image(input){
 /*
@@ -110,7 +118,9 @@ function load_image(input){
     var file = input.files[0];
     original_image_file = file;
     newImage.src = URL.createObjectURL(file);
+    showPic.appendChild(newImage);
 
+    //원본 이미지의 정보 저장
     var fileReader = new FileReader();
     fileReader.onload = function(e){
       var tmp = new Image();
@@ -124,8 +134,6 @@ function load_image(input){
     }
     fileReader.readAsDataURL(file);
 
-    showPic.appendChild(newImage);
-
     showPic.style.display = "block";
     picture.style.marginBottom = "0px";
     var opt = document.getElementsByClassName('option');
@@ -136,10 +144,6 @@ function load_image(input){
     newImage.style.width = "100%";
     newImage.style.height = "100%";
     newImage.style.objectFit = "contain";
-    //newImage.style.objectFit = "cover";
-    //container.style.overflow = "hidden";
-    newImage.style.filter = "none";
-    //newImage.style.maxWidth = "100%";
 
     edit_image();
 
@@ -148,7 +152,6 @@ function load_image(input){
   }
 }
 
-var cropper;
 
 function edit_image(){
   const image = document.getElementById('newPic');
@@ -165,10 +168,6 @@ function edit_image(){
   });
 }
 
-var commands = [];  //버튼 명령을 저장하는 배열
-var rotateCount = 0;
-var newCanvas = null; //자른 이미지 놓을 canvas
-var btnDisable = false; //크롭 확인 버튼 비활성화
 
 function toggle_cropper(){
   if(toggleBtn.getAttribute('value') === 'on'){
@@ -196,7 +195,6 @@ function rotateLeft(){
   commands.push("rotate_L");
   rotateCount--;
 }
-
 function rotateRight(){
   cropper.rotate(90);
   commands.push("rotate_R");
@@ -258,9 +256,14 @@ function undo(){
 }
 
 function rotateOriginal(){
+
+  //여기 캔버스 크기 그대로 두고 중앙에 그려지고, 나머지 부분은 블러로 채워지도록 해야함
+
   var originalCanvas = document.querySelector("#originalCanvas");
   var originalContext = originalCanvas.getContext('2d');
   var originalImage = new Image();
+  var editedWidth = editedHeight = 0;
+  var originalRatio = imageWidth / imageHeight;
   
   originalImage.src = original_src;
   originalImage.width = imageWidth;
@@ -270,29 +273,75 @@ function rotateOriginal(){
   var rotate = rotateCount % 4;
   if (rotate < 0) rotate += 4;
 
-  if(rotate == 0 || rotate == 2){
-    originalCanvas.width = originalImage.width;
-    originalCanvas.height = originalImage.height;
-    if(rotate == 0){
-      originalContext.drawImage(originalImage, 0, 0);
+  if(rotate==0 || rotate==2){
+    if(originalRatio < 16/9){
+      editedHeight = originalCanvas.height;
+      editedWidth = editedHeight * originalRatio;
     }
     else{
-      originalContext.rotate((Math.PI / 180) * 180);
-      originalContext.drawImage(originalImage, -originalImage.width, -originalImage.height);
+      editedWidth = originalCanvas.width;
+      editedHeight = editedWidth / originalRatio;
     }
   }
   else{
-    originalCanvas.width = originalImage.height;
-    originalCanvas.height = originalImage.width;
-    originalContext.translate(originalCanvas.width/2, originalCanvas.height/2);
-    
-    if(rotate == 1){
-      originalContext.rotate((Math.PI / 180) * 90);
+    if(originalRatio < 9/16){
+      editedHeight = originalCanvas.width;
+      editedWidth = editedHeight * originalRatio;
     }
     else{
-      originalContext.rotate((Math.PI / 180) * 270);
+      editedWidth = originalCanvas.height;
+      editedHeight = editedWidth / originalRatio;
     }
-    originalContext.drawImage(originalImage, -(originalImage.width/2), -(originalImage.height/2));
+  }
+  
+  originalContext.filter = 'blur(50px)';
+  switch(rotate){
+    case 0:
+      originalContext.drawImage(originalImage, 0, 0, originalCanvas.width, originalCanvas.height);
+      originalContext.filter = 'none';
+      if(originalRatio < 16/9){
+        originalContext.drawImage(originalImage, (originalCanvas.width-editedWidth)/2, 0, editedWidth, editedHeight);
+      }
+      else{
+        originalContext.drawImage(originalImage, 0, (originalCanvas.height-editedHeight)/2, editedWidth, editedHeight);
+      }
+      break;
+    case 1:
+      originalContext.rotate((Math.PI / 180) * 90);
+      originalContext.translate(0, -originalCanvas.width);
+      originalContext.drawImage(originalImage, 0, 0, originalCanvas.height, originalCanvas.width);
+      originalContext.filter = "none";
+      if(originalRatio < 9/16){
+        originalContext.drawImage(originalImage, (originalCanvas.height-editedWidth)/2, 0, editedWidth, editedHeight);
+      }
+      else{
+        originalContext.drawImage(originalImage, 0, (originalCanvas.width-editedHeight)/2, editedWidth, editedHeight);
+      }
+      break;
+    case 2:
+      originalContext.rotate((Math.PI / 180) * 180);
+      originalContext.translate(-originalCanvas.width, -originalCanvas.height);
+      originalContext.drawImage(originalImage, 0, 0, originalCanvas.width, originalCanvas.height);
+      originalContext.filter = 'none';
+      if(originalRatio < 16/9){
+        originalContext.drawImage(originalImage, (originalCanvas.width-editedWidth)/2, 0, editedWidth, editedHeight);
+      }
+      else{
+        originalContext.drawImage(originalImage, 0, (originalCanvas.height-editedHeight)/2, editedWidth, editedHeight);
+      }
+      break;
+    case 3:
+      originalContext.rotate((Math.PI / 180) * 270);
+      originalContext.translate(-originalCanvas.height, 0);
+      originalContext.drawImage(originalImage, 0, 0, originalCanvas.height, originalCanvas.width);
+      originalContext.filter = 'none';
+      if(originalRatio < 9/16){
+        originalContext.drawImage(originalImage, (originalCanvas.height-editedWidth)/2, 0, editedWidth, editedHeight);
+      }
+      else{
+        originalContext.drawImage(originalImage, 0, (originalCanvas.width-editedHeight)/2, editedWidth, editedHeight);
+        }
+      break;  
   }
   return originalCanvas;
 }
