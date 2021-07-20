@@ -82,6 +82,7 @@ var editBtn = document.querySelector('.editBtn');
 var toggleBtn = document.querySelector('#toggleBtn')
 var msgBox = document.querySelector('.msgBox');
 var original_image_file = null;
+var original_src = null;
 var imageWidth = imageHeight = 0;
 
 function load_image(input){
@@ -115,8 +116,10 @@ function load_image(input){
       var tmp = new Image();
       tmp.src = e.target.result;
       tmp.onload = function(){
+        original_src = this.src;
         imageWidth = this.width;
         imageHeight = this.height;
+        console.log(original_src);
       };
     }
     fileReader.readAsDataURL(file);
@@ -255,11 +258,11 @@ function undo(){
 }
 
 function rotateOriginal(){
-  var originalCanvas = document.createElement("canvas");
+  var originalCanvas = document.querySelector("#originalCanvas");
   var originalContext = originalCanvas.getContext('2d');
   var originalImage = new Image();
   
-  originalImage.src = URL.createObjectURL(original_image_file);
+  originalImage.src = original_src;
   originalImage.width = imageWidth;
   originalImage.height = imageHeight;
   originalContext.clearRect(0, 0, imageWidth, imageHeight);
@@ -270,10 +273,13 @@ function rotateOriginal(){
   if(rotate == 0 || rotate == 2){
     originalCanvas.width = originalImage.width;
     originalCanvas.height = originalImage.height;
-    if(rotate == 2){
-      originalContext.rotate((Math.PI / 180) * 180);
+    if(rotate == 0){
+      originalContext.drawImage(originalImage, 0, 0);
     }
-    originalContext.drawImage(originalImage, 0, 0);
+    else{
+      originalContext.rotate((Math.PI / 180) * 180);
+      originalContext.drawImage(originalImage, -originalImage.width, -originalImage.height);
+    }
   }
   else{
     originalCanvas.width = originalImage.height;
@@ -364,7 +370,7 @@ function upload_image(){
     else
     {
       //위 if문 안의 코드 참고해서 작성했습니다
-      //크롭이미지 캔버스 대신 회전시킨 원본을 그린 캔버스를 작성했습니다
+      //크롭이미지 캔버스 자리에 회전시킨 원본을 그린 캔버스를 작성했습니다
       var thumbnailCanvas = document.getElementById("thumbnail");
       var tbumbnailContext = thumbnailCanvas.getContext("2d");
 
@@ -376,7 +382,7 @@ function upload_image(){
       tbumbnailContext.drawImage(rotateOriginal(), 0, 0, 343, 191);
       var thumbnailData = thumbnailCanvas.toDataURL("image/jpeg",0.7);
 
-
+      
       parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image");
 
       //parent. document.getElementById("sunny_spinner").classList.remove("d-none");
