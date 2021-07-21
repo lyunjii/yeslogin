@@ -269,7 +269,8 @@ function rotateOriginal(){
   originalImage.width = imageWidth;
   originalImage.height = imageHeight;
   originalContext.clearRect(0, 0, imageWidth, imageHeight);
-  
+  originalContext.save();
+
   var rotate = rotateCount % 4;
   if (rotate < 0) rotate += 4;
 
@@ -343,6 +344,7 @@ function rotateOriginal(){
         }
       break;  
   }
+  originalContext.restore();
   return originalCanvas;
 }
 
