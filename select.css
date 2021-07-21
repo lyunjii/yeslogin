@@ -108,7 +108,8 @@ ul {
 }
 .iconImg {
   margin-right: 9px;
-  color: #ffffff;
+}
+.iconImg.black {
   filter: invert(100%) sepia(96%) hue-rotate(74deg) brightness(104%)
     contrast(104%);
 }
