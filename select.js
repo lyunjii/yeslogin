@@ -85,9 +85,9 @@ var msgBox = document.querySelector('.msgBox');
 var cropper;
 
 var newCanvas = null; //자른 이미지 놓을 canvas
-var original_image_file = null;
-var original_src = null;
-var imageWidth = imageHeight = 0;
+var originalImage;
+// var original_image_file = null;
+// var original_src = null;
 
 var commands = [];  //버튼 명령을 저장하는 배열
 var rotateCount = 0;  //원본 이미지를 회전 정보
@@ -123,14 +123,8 @@ function load_image(input){
     //원본 이미지의 정보 저장
     var fileReader = new FileReader();
     fileReader.onload = function(e){
-      var tmp = new Image();
-      tmp.src = e.target.result;
-      tmp.onload = function(){
-        original_src = this.src;
-        imageWidth = this.width;
-        imageHeight = this.height;
-        console.log(original_src);
-      };
+      originalImage = new Image();
+      originalImage.src = e.target.result;
     }
     fileReader.readAsDataURL(file);
 
@@ -261,13 +255,9 @@ function rotateOriginal(){
 
   var originalCanvas = document.querySelector("#originalCanvas");
   var originalContext = originalCanvas.getContext('2d');
-  var originalImage = new Image();
   var editedWidth = editedHeight = 0;
-  var originalRatio = imageWidth / imageHeight;
+  var originalRatio = originalImage.width / originalImage.height;
   
-  originalImage.src = original_src;
-  originalImage.width = imageWidth;
-  originalImage.height = imageHeight;
   originalContext.clearRect(0, 0, originalCanvas.width, originalCanvas.height);
   originalContext.save();
 
