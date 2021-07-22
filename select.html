@@ -38,7 +38,7 @@
       </li>
       <li class="nav-item" role="presentation">
         <button class="tabBtn nav-link" id="pills-vote-tab" data-bs-toggle="pill" data-bs-target="#pills-vote" 
-        type="button" role="tab" aria-controls="pills-vote" aria-selected="false">
+        type="button" role="tab" aria-controls="pills-vote" aria-selected="false" onclick="vote()">
           <img class="iconImg" src="img/vote_white.svg" alt="" width="23px" height="23px">
           <span>투표</span>
         </button>
@@ -85,7 +85,23 @@
       </section>
     </div>
     <div class="tab-pane" id="pills-vote" role="tabpanel" aria-labelledby="pills-vote-tab">
-      <section class="orangebox">
+      <section class="orangebox vote">
+        <!-- <div>
+          <table class="voteList">
+            <tr>
+              <td class="voteImage" colspan="2"><img src="img/profile_img.jpg" alt=""></td>
+            </tr>
+            <tr>
+              <td rowspan="2"><img class="image_user" src="img/profile_img.jpg" alt=""></td>
+              <td class="image_comment">30자 코멘트</td>
+            </tr>
+            <tr>
+              <td class="image_name">첫번째</td>
+              <label class="form-check-label" for="image_vote">
+              <input class="form-check-input shadow-none" type="checkbox" value="" id="image_vote">
+            </tr>
+          </table>
+        </div> -->
         <ul class="voteList">
           <li class="voteElement">
             <div class="voteImage">
@@ -230,7 +246,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.js" integrity="sha512-ZK6m9vADamSl5fxBPtXw6ho6A4TuX89HUbcfvxa2v2NYNT/7l8yFGJ3JlXyMN4hlNbz0il4k6DvqbIW5CCwqkw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.js" integrity="sha512-qRj8N7fxOHxPkKjnQ9EJgLJ8Ng1OK7seBn1uk8wkqaXpa7OA13LO6txQ7+ajZonyc9Ts4K/ugXljevkFTUGBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="select.js" async defer></script>
-  <script src="select_pinch.js" async defer></script>
+  <script src="select_vote.js" async defer></script>
 
   <canvas id="Canvas1"   width="1463" height="823" style="border:0px solid;display: none;">
   </canvas>

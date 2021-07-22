@@ -30,8 +30,9 @@ window.onload = function (){
     var orangebox = document.getElementsByClassName('orangebox');
     for(var i = 0; i < orangebox.length; i++){
       orangebox[i].style.width = "600px";
-      orangebox[i].style.height = "547px";
+      orangebox[i].style.height = "657px";
     }
+    document.querySelector('.orangebox.picture').style.height = "547px";
 
     document.querySelector('.upTxt').style.marginTop = "12px";
 
@@ -460,4 +461,31 @@ function upload_image(){
   }
 
   reset_image_box();
+}
+
+function vote(){
+  if(!is_mobile()){
+    var voteImage = document.getElementsByClassName('voteImage');
+    var voteImage_img = document.querySelectorAll('.voteImage img');
+    var voteImage_user = document.getElementsByClassName('image_user');
+    var imageInfo = document.getElementsByClassName('imageInfo');
+    var voteElement = document.getElementsByClassName('voteElement');
+    for(var i = 0; i < voteImage.length; i++){
+      voteImage[i].style.width = "267px";
+      voteImage[i].style.height = "151.31px";
+      voteImage_img[i].style.borderRadius = "10px 10px 0px 0px";
+      voteImage_user[i].style.width = "33px";
+      voteImage_user[i].style.height = "33px";
+      imageInfo[i].style.height = "45.69px";
+      voteElement[i].style.width = "269px";
+      voteElement[i].style.height = "197px";
+      voteElement[i].style.borderRadius = "10px";
+      voteElement[i].style.marginTop = "10px";
+    }
+    var voteList = document.querySelector('.voteList');
+    voteList.style.justifyContent = "space-evenly";
+    voteList.classList.add('bar');
+    var voteBox = document.querySelector('.orangebox.vote');
+    voteBox.style.paddingRight = "11px";
+  }
 }

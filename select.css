@@ -311,6 +311,24 @@ ul {
 .voteList::-webkit-scrollbar {
   display: none;
 }
+.voteList.bar::-webkit-scrollbar {
+  display: inline;
+  width: 16px;
+}
+.voteList.bar::-webkit-scrollbar-thumb {
+  background-color: #c9c9c9;
+  border-radius: 7px;
+}
+.voteList.voteList.bar::-webkit-scrollbar-track {
+  background-color: #f4f5f6;
+  border-radius: 8px;
+}
+.voteList.bar::-webkit-scrollbar-button {
+  height: 5px;
+}
+.voteList.bar::-webkit-scrollbar-button:start {
+  height: 27px;
+}
 /*   show text   */
 .showTxt {
   font-size: 14px;
