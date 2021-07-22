@@ -17,6 +17,7 @@ window.onload = function (){
     var user = document.getElementsByClassName('user');
     for(var i = 0; i < user.length; i++){
       user[i].style.width = "296px";
+      user[i].style.paddingLeft = user[i].style.paddingRight = "15px";
     }
 
     var btn = document.getElementsByClassName('tabBtn');
