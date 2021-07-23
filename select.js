@@ -87,6 +87,7 @@ var msgBox = document.querySelector('.msgBox');
 var cropper;
 
 var newCanvas = null; //자른 이미지 놓을 canvas
+var croppedCanvas = null;
 var originalImage;
 // var original_image_file = null;
 // var original_src = null;
@@ -202,7 +203,6 @@ function get_image(){
   else{
     newCanvas = null;
     newCanvas = document.createElement("canvas");
-    newCanvas.setAttribute("id", 'newCanvas');
 
     if(is_mobile()){
       newCanvas = cropper.getCroppedCanvas({
@@ -217,7 +217,16 @@ function get_image(){
     });
     }
     
+    croppedCanvas = null;
+    croppedCanvas = document.createElement("canvas");
+    croppedCanvas = cropper.getCroppedCanvas({
+      width: 1464,
+      height: 823
+    });
+
     result.appendChild(newCanvas);
+    document.querySelector('body').appendChild(croppedCanvas);
+    croppedCanvas.style.display = "none";
 
     result.style.display = "flex";
     result.style.alignItems = "center";
@@ -245,16 +254,13 @@ function undo(){
       while (result.firstChild) {
         result.removeChild(result.firstChild);
       }
-      newCanvas = null;
+      newCanvas = croppedCanvas = null;
       btnDisable = false;
       break;
   }
 }
 
 function rotateOriginal(){
-
-  //여기 캔버스 크기 그대로 두고 중앙에 그려지고, 나머지 부분은 블러로 채워지도록 해야함
-
   var originalCanvas = document.querySelector("#originalCanvas");
   var originalContext = originalCanvas.getContext('2d');
   var editedWidth = editedHeight = 0;
@@ -359,7 +365,7 @@ function reset_image_box(){
   while (result.firstChild) {
     result.removeChild(result.firstChild);
   }  
-  newCanvas = null;
+  newCanvas = croppedCanvas = null;
   msgBox.value='';
   btnDisable = false;
   commands = [];
@@ -398,18 +404,18 @@ function upload_image(){
       tbumbnailContext.clearRect(0, 0, thumbnailCanvas.width, thumbnailCanvas.height);
 
       
-      tbumbnailContext.drawImage(newCanvas, 0, 0, 343, 191);
+      tbumbnailContext.drawImage(croppedCanvas, 0, 0, 343, 191);
       var thumbnailData = thumbnailCanvas.toDataURL("image/jpeg",0.7);
 
       var canvas = document.getElementById("Canvas2");
       var canvasContext = canvas.getContext("2d");
       canvasContext.clearRect(0, 0, canvas.width, canvas.height);
-      canvasContext.drawImage(newCanvas, 0, 0, canvas.width, canvas.height);
+      canvasContext.drawImage(croppedCanvas, 0, 0, canvas.width, canvas.height);
 
       //parent.sunny.uploadToGD_base64(newCanvas.toDataURL("image/PNG",1),msg,thumbnailData);
       parent.sunny.uploadToGD_base64(thumbnailData,msg,canvas.toDataURL("image/PNG",1),"image");
     }
-      
+
     else
     {
       //위 if문 안의 코드 참고해서 작성했습니다
