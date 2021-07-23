@@ -225,10 +225,10 @@ function get_image(){
     });
 
     result.appendChild(newCanvas);
-    document.querySelector('body').appendChild(croppedCanvas);
-    croppedCanvas.style.display = "none";
+    result.appendChild(croppedCanvas);
 
     result.style.display = "flex";
+    croppedCanvas.style.display = "none";
     result.style.alignItems = "center";
     showPic.style.display = "none";
     btnDisable = true;
