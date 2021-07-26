@@ -244,11 +244,6 @@ ul {
   top: 320px;
 }
 /*   vote   */
-.voteImage img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
 .voteImage {
   width: 331px;
   height: 186px;
@@ -301,33 +296,96 @@ ul {
   position: relative;
 }
 .voteList {
-  width: 100%;
-  height: 100%;
-  overflow-y: scroll;
   display: flex;
-  justify-content: center;
   flex-flow: wrap;
+  margin-right: 11px;
 }
-.voteList::-webkit-scrollbar {
+.voteListBox {
+  width: 333px;
+  height: 434px;
+  overflow-y: scroll;
+}
+.voteListBox::-webkit-scrollbar {
   display: none;
 }
-.voteList.bar::-webkit-scrollbar {
+#toggleCol {
+  display: none;
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  top: 7px;
+  right: 3px;
+  cursor: pointer;
+}
+/*  vote pc column 2  */
+.pcVote2 .voteImage {
+  width: 267px;
+  height: 151.31px;
+  border-radius: 10px 10px 0px 0px;
+}
+.pcVote2 .image_user {
+  width: 33px;
+  height: 33px;
+}
+.pcVote2 .imageInfo {
+  height: 45.69px;
+}
+.pcVote2 .voteElement {
+  width: 269px;
+  height: 197px;
+  border-radius: 10px;
+  margin: 10px 0px 0px 9px;
+}
+/*  vote pc column 1  */
+.pcVote1 .voteImage {
+  width: 546px;
+  height: 307px;
+  border-radius: 10px 10px 0px 0px;
+}
+.pcVote1 .image_user {
+  width: 70px;
+  height: 70px;
+  margin-right: 10px;
+}
+.pcVote1 .image_name {
+  margin-top: 20px;
+  margin-bottom: 29px;
+}
+.pcVote1 .imageInfo {
+  height: 96px;
+}
+.pcVote1 .voteElement {
+  width: 548px;
+  height: 401px;
+  border-radius: 10px;
+  margin: 10px 10px 0px 9px;
+}
+/*   vote pc   */
+.pcVote {
+  width: 583px;
+  height: 651px;
+}
+.pcVote::-webkit-scrollbar {
   display: inline;
   width: 16px;
 }
-.voteList.bar::-webkit-scrollbar-thumb {
+.pcVote::-webkit-scrollbar-thumb {
   background-color: #c9c9c9;
   border-radius: 7px;
 }
-.voteList.voteList.bar::-webkit-scrollbar-track {
+.pcVote::-webkit-scrollbar-track {
   background-color: #f4f5f6;
   border-radius: 8px;
 }
-.voteList.bar::-webkit-scrollbar-button {
+.pcVote::-webkit-scrollbar-button {
   height: 5px;
 }
-.voteList.bar::-webkit-scrollbar-button:start {
-  height: 27px;
+.pcVote::-webkit-scrollbar-button:start {
+  height: 47px;
+}
+.pcVote::-webkit-scrollbar-button:vertical:start:increment,
+.pcVote::-webkit-scrollbar-button:vertical:end:decrement {
+  display: none;
 }
 /*   show text   */
 .showTxt {

@@ -471,27 +471,27 @@ function upload_image(){
 
 function vote(){
   if(!is_mobile()){
-    var voteImage = document.getElementsByClassName('voteImage');
-    var voteImage_img = document.querySelectorAll('.voteImage img');
-    var voteImage_user = document.getElementsByClassName('image_user');
-    var imageInfo = document.getElementsByClassName('imageInfo');
-    var voteElement = document.getElementsByClassName('voteElement');
-    for(var i = 0; i < voteImage.length; i++){
-      voteImage[i].style.width = "267px";
-      voteImage[i].style.height = "151.31px";
-      voteImage_img[i].style.borderRadius = "10px 10px 0px 0px";
-      voteImage_user[i].style.width = "33px";
-      voteImage_user[i].style.height = "33px";
-      imageInfo[i].style.height = "45.69px";
-      voteElement[i].style.width = "269px";
-      voteElement[i].style.height = "197px";
-      voteElement[i].style.borderRadius = "10px";
-      voteElement[i].style.marginTop = "10px";
-    }
-    var voteList = document.querySelector('.voteList');
-    voteList.style.justifyContent = "space-evenly";
-    voteList.classList.add('bar');
-    var voteBox = document.querySelector('.orangebox.vote');
-    voteBox.style.paddingRight = "11px";
+    var voteListBox = document.querySelector('.voteListBox');
+    voteListBox.classList.add('pcVote');
+    voteListBox.classList.add('pcVote2');
+    voteListBox.classList.remove('pcVote1');
+    document.querySelector('#toggleCol').style.display = "block";
+    document.querySelector('.orangebox.vote').style.paddingRight = "9px";
+  }
+}
+
+function toggle_column(btn){
+  var voteListBox = document.querySelector('.voteListBox');
+  if(btn.getAttribute('value') === '2'){
+    btn.setAttribute('value', '1');
+    btn.setAttribute('src', 'img/2row.svg');
+    voteListBox.classList.toggle('pcVote2');
+    voteListBox.classList.toggle('pcVote1');
+  }
+  else{
+    btn.setAttribute('value', '2');
+    btn.setAttribute('src', 'img/1row.svg');
+    voteListBox.classList.toggle('pcVote2');
+    voteListBox.classList.toggle('pcVote1');
   }
 }
