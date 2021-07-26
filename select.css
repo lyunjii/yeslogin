@@ -338,24 +338,28 @@ ul {
 }
 /*  vote pc column 1  */
 .pcVote1 .voteImage {
-  width: 546px;
+  width: 545px;
   height: 307px;
   border-radius: 10px 10px 0px 0px;
 }
 .pcVote1 .image_user {
   width: 70px;
   height: 70px;
-  margin-right: 10px;
+  margin: 12px 10px 12px 12px;
+}
+.pcVote1 .image_comment {
+  margin-top: 18px;
 }
 .pcVote1 .image_name {
-  margin-top: 20px;
-  margin-bottom: 29px;
+  margin-top: 18px;
+  margin-bottom: 25px;
 }
 .pcVote1 .imageInfo {
-  height: 96px;
+  height: 94px;
+  padding: 0px;
 }
 .pcVote1 .voteElement {
-  width: 548px;
+  width: 547px;
   height: 401px;
   border-radius: 10px;
   margin: 10px 10px 0px 9px;

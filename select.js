@@ -475,7 +475,10 @@ function vote(){
     voteListBox.classList.add('pcVote');
     voteListBox.classList.add('pcVote2');
     voteListBox.classList.remove('pcVote1');
-    document.querySelector('#toggleCol').style.display = "block";
+    var btn = document.querySelector('#toggleCol')
+    btn.style.display = "block";
+    btn.setAttribute('value', '2');
+    btn.setAttribute('src', 'img/1row.svg');
     document.querySelector('.orangebox.vote').style.paddingRight = "9px";
   }
 }
