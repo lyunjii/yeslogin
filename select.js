@@ -57,6 +57,7 @@ window.onload = function (){
     //cropPointer.style.height = "22px";
     
   }
+  adjust_size(window.innerHeight);
 }
 
 function is_mobile()
@@ -496,5 +497,19 @@ function toggle_column(btn){
     btn.setAttribute('src', 'img/1row.svg');
     voteListBox.classList.toggle('pcVote2');
     voteListBox.classList.toggle('pcVote1');
+  }
+}
+
+function adjust_size(height) {
+  if(is_mobile()){
+    let screen_height = height;
+
+    var orangebox = document.getElementsByClassName("orangebox");
+    var voteListBox = document.querySelector(".voteListBox");
+
+    for(var i = 1; i < orangebox.length; i++){
+      orangebox[i].style.height = `${screen_height - 230}px`;
+    }
+    voteListBox.style.height = `${screen_height - 236}px`;
   }
 }
