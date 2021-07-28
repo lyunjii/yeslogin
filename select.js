@@ -57,7 +57,9 @@ window.onload = function (){
     //cropPointer.style.height = "22px";
     
   }
-  adjust_size(window.innerHeight);
+  else{
+    adjust_size(window.innerHeight);
+  }
 }
 
 function is_mobile()
@@ -260,7 +262,7 @@ function undo(){
       break;
   }
 }
-
+var padding_ptx = 5;
 function rotateOriginal(){
   var originalCanvas = document.querySelector("#originalCanvas");
   var originalContext = originalCanvas.getContext('2d');
@@ -295,15 +297,16 @@ function rotateOriginal(){
   }
   
   originalContext.filter = 'blur(50px)';
+  
   switch(rotate){
     case 0:
       originalContext.drawImage(originalImage, 0, 0, originalCanvas.width, originalCanvas.height);
       originalContext.filter = 'none';
       if(originalRatio < 16/9){
-        originalContext.drawImage(originalImage, (originalCanvas.width-editedWidth)/2, 0, editedWidth, editedHeight);
+        originalContext.drawImage(originalImage, (originalCanvas.width-editedWidth)/2 + padding_ptx, 0 +padding_ptx, editedWidth-padding_ptx*2, editedHeight-padding_ptx*2);
       }
       else{
-        originalContext.drawImage(originalImage, 0, (originalCanvas.height-editedHeight)/2, editedWidth, editedHeight);
+        originalContext.drawImage(originalImage, 0 + padding_ptx, (originalCanvas.height-editedHeight)/2 + padding_ptx, editedWidth-padding_ptx*2, editedHeight-padding_ptx*2);
       }
       break;
     case 1:
@@ -312,10 +315,10 @@ function rotateOriginal(){
       originalContext.drawImage(originalImage, 0, 0, originalCanvas.height, originalCanvas.width);
       originalContext.filter = "none";
       if(originalRatio < 9/16){
-        originalContext.drawImage(originalImage, (originalCanvas.height-editedWidth)/2, 0, editedWidth, editedHeight);
+        originalContext.drawImage(originalImage, (originalCanvas.height-editedWidth)/2 + padding_ptx, 0 + padding_ptx, editedWidth-padding_ptx*2, editedHeight-padding_ptx*2);
       }
       else{
-        originalContext.drawImage(originalImage, 0, (originalCanvas.width-editedHeight)/2, editedWidth, editedHeight);
+        originalContext.drawImage(originalImage, 0 +padding_ptx, (originalCanvas.width-editedHeight)/2 + padding_ptx, editedWidth -padding_ptx*2, editedHeight-padding_ptx*2);
       }
       break;
     case 2:
@@ -324,10 +327,10 @@ function rotateOriginal(){
       originalContext.drawImage(originalImage, 0, 0, originalCanvas.width, originalCanvas.height);
       originalContext.filter = 'none';
       if(originalRatio < 16/9){
-        originalContext.drawImage(originalImage, (originalCanvas.width-editedWidth)/2, 0, editedWidth, editedHeight);
+        originalContext.drawImage(originalImage, (originalCanvas.width-editedWidth)/2 + padding_ptx, 0 + padding_ptx, editedWidth-padding_ptx*2, editedHeight-padding_ptx*2);
       }
       else{
-        originalContext.drawImage(originalImage, 0, (originalCanvas.height-editedHeight)/2, editedWidth, editedHeight);
+        originalContext.drawImage(originalImage, 0+ padding_ptx, (originalCanvas.height-editedHeight)/2 + padding_ptx, editedWidth-padding_ptx*2, editedHeight-padding_ptx*2);
       }
       break;
     case 3:
@@ -336,10 +339,10 @@ function rotateOriginal(){
       originalContext.drawImage(originalImage, 0, 0, originalCanvas.height, originalCanvas.width);
       originalContext.filter = 'none';
       if(originalRatio < 9/16){
-        originalContext.drawImage(originalImage, (originalCanvas.height-editedWidth)/2, 0, editedWidth, editedHeight);
+        originalContext.drawImage(originalImage, (originalCanvas.height-editedWidth)/2 + padding_ptx, 0 + padding_ptx, editedWidth-padding_ptx*2, editedHeight-padding_ptx*2);
       }
       else{
-        originalContext.drawImage(originalImage, 0, (originalCanvas.width-editedHeight)/2, editedWidth, editedHeight);
+        originalContext.drawImage(originalImage, 0 + padding_ptx, (originalCanvas.width-editedHeight)/2 + padding_ptx, editedWidth-padding_ptx*2, editedHeight-padding_ptx*2);
         }
       break;  
   }
@@ -429,7 +432,7 @@ function upload_image(){
       tbumbnailContext.clearRect(0, 0, thumbnailCanvas.width, thumbnailCanvas.height);
 
       
-      tbumbnailContext.drawImage(rotateOriginal(), 0, 0, 343, 191);
+      tbumbnailContext.drawImage(rotateOriginal(), 0 +padding_ptx, 0+padding_ptx, 343-padding_ptx*2, 191-padding_ptx*2);
       var thumbnailData = thumbnailCanvas.toDataURL("image/jpeg",0.7);
 
       
