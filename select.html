@@ -44,8 +44,8 @@
         </button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="tabBtn nav-link" id="pills-show-tab" data-bs-toggle="pill" data-bs-target="#pills-show" 
-        type="button" role="tab" aria-controls="pills-show" aria-selected="false">
+        <button class="tabBtn nav-link" id="pills-slide-tab" data-bs-toggle="pill" data-bs-target="#pills-slide" 
+        type="button" role="tab" aria-controls="pills-slide" aria-selected="false">
           <img class="iconImg" src="img/view_icon.svg" alt="" width="21px" height="16.8px">
           <span>보기</span>
         </button>
@@ -87,9 +87,9 @@
     <div class="tab-pane" id="pills-vote" role="tabpanel" aria-labelledby="pills-vote-tab">
       <section class="orangebox vote">
         <div class="voteListBox">
-          <ul class="voteList">
+          <ul class="voteList" id="voteList">
             <li class="voteElement">
-              <img class="voteImage" src="img/profile_img.jpg" alt="">
+              <img class="voteImage" src="img/toni-tan-unsplash.jpg" alt="">
               <div class="imageInfo">
                 <img class="image_user" src="img/profile_img.jpg" alt="">
                 <div>
@@ -102,7 +102,7 @@
               <input class="form-check-input shadow-none" type="checkbox" value="" id="image_vote">
             </li>
             <li class="voteElement">
-              <img class="voteImage" src="img/profile_img.jpg" alt="">
+              <img class="voteImage" src="img/toni-tan-unsplash.jpg" alt="">
               <div class="imageInfo">
                 <img class="image_user" src="img/profile_img.jpg" alt="">
                 <div>
@@ -115,7 +115,7 @@
               <input class="form-check-input shadow-none" type="checkbox" value="" id="image_vote">
             </li>
             <li class="voteElement">
-              <img class="voteImage" src="img/profile_img.jpg" alt="">
+              <img class="voteImage" src="img/toni-tan-unsplash.jpg" alt="">
               <div class="imageInfo">
                 <img class="image_user" src="img/profile_img.jpg" alt="">
                 <div>
@@ -129,7 +129,7 @@
             </li>
             
             <li class="voteElement">
-              <img class="voteImage" src="img/profile_img.jpg" alt="">
+              <img class="voteImage" src="img/toni-tan-unsplash.jpg" alt="">
               <div class="imageInfo">
                 <img class="image_user" src="img/profile_img.jpg" alt="">
                 <div>
@@ -143,7 +143,7 @@
             </li>
             
             <li class="voteElement">
-              <img class="voteImage" src="img/profile_img.jpg" alt="">
+              <img class="voteImage" src="img/toni-tan-unsplash.jpg" alt="">
               <div class="imageInfo">
                 <img class="image_user" src="img/profile_img.jpg" alt="">
                 <div>
@@ -156,7 +156,7 @@
               <input class="form-check-input shadow-none" type="checkbox" value="" id="image_vote">
             </li>
             <li class="voteElement">
-              <img class="voteImage" src="img/profile_img.jpg" alt="">
+              <img class="voteImage" src="img/toni-tan-unsplash.jpg" alt="">
               <div class="imageInfo">
                 <img class="image_user" src="img/profile_img.jpg" alt="">
                 <div>
@@ -169,25 +169,12 @@
               <input class="form-check-input shadow-none" type="checkbox" value="" id="image_vote">
             </li>
             <li class="voteElement">
-              <img class="voteImage" src="img/profile_img.jpg" alt="">
+              <img class="voteImage" src="img/toni-tan-unsplash.jpg" alt="">
               <div class="imageInfo">
                 <img class="image_user" src="img/profile_img.jpg" alt="">
                 <div>
                   <div class="image_comment">30자 코멘트</div>
                   <div class="image_name">일곱번째</div>
-                </div>
-              </div>
-              <div class="voteScroll"></div>
-              <label class="form-check-label" for="image_vote">
-              <input class="form-check-input shadow-none" type="checkbox" value="" id="image_vote">
-            </li>
-            <li class="voteElement">
-              <img class="voteImage" src="img/profile_img.jpg" alt="">
-              <div class="imageInfo">
-                <img class="image_user" src="img/profile_img.jpg" alt="">
-                <div>
-                  <div class="image_comment">30자 코멘트</div>
-                  <div class="image_name">마지막</div>
                 </div>
               </div>
               <div class="voteScroll"></div>
@@ -200,13 +187,16 @@
         <img id="toggleCol" src="img/1row.svg" alt="" value="2" onclick="toggle_column(this)">
       </section>
     </div>
-    <div class="tab-pane" id="pills-show" role="tabpanel" aria-labelledby="pills-show-tab">
-      <section class="orangebox">
-        <span class="showTxt">
-          진행자가 사진을 공유하면
-          <br>
-          이 화면에서 볼 수 있습니다.
-        </span>
+    <div class="tab-pane" id="pills-slide" role="tabpanel" aria-labelledby="pills-slide-tab">
+      <section class="orangebox slide">
+        <div id="slideContainer">
+          <span class="slideTxt">
+            진행자가 사진을 공유하면
+            <br>
+            이 화면에서 볼 수 있습니다.
+          </span>
+          <!-- <img src="img/toni-tan-unsplash.jpg" alt="" width="100%" height="100%"> -->
+        </div>
       </section>
     </div>
   </div>

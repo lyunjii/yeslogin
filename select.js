@@ -1,5 +1,8 @@
+var windowWidth = window.innerWidth;
+var windowHeight = window.innerHeight;
 window.onload = function (){
-  
+  windowWidth = window.innerWidth;
+  windowHeight = window.innerHeight;
   if(!is_mobile()){
     var logo = document.querySelector('.logo');
     logo.style.width = "258px";
@@ -52,13 +55,17 @@ window.onload = function (){
     sendIcon.style.height = "20px";
     sendIcon.style.marginRight = "10.88px";
 
+    var slideContainer = document.querySelector('#slideContainer');
+    slideContainer.style.width = "594px";
+    slideContainer.style.height = "334.125px";
+
     //var cropPointer = document.querySelector('.cropper-point.point-se');
     //cropPointer.style.width = "22px";
     //cropPointer.style.height = "22px";
     
   }
   else{
-    adjust_size(window.innerHeight);
+    adjust_size(windowHeight);
   }
 }
 
@@ -505,14 +512,46 @@ function toggle_column(btn){
 
 function adjust_size(height) {
   if(is_mobile()){
-    let screen_height = height;
+    if(window.orientation == 0){
+      var orangebox = document.getElementsByClassName("orangebox");
+      var voteListBox = document.querySelector(".voteListBox");
 
-    var orangebox = document.getElementsByClassName("orangebox");
-    var voteListBox = document.querySelector(".voteListBox");
-
-    for(var i = 1; i < orangebox.length; i++){
-      orangebox[i].style.height = `${screen_height - 230}px`;
+      for(var i = 1; i < orangebox.length; i++){
+        orangebox[i].style.height = `${height - 230}px`;
+      }
+      voteListBox.style.height = `${height - 236}px`;
     }
-    voteListBox.style.height = `${screen_height - 236}px`;
   }
 }
+
+window.addEventListener("orientationchange", function() {
+  if(is_mobile()) {
+    var slideTab = document.getElementById('pills-slide');
+    var slideBox = document.querySelector('.slide');
+    var slideContainer = document.querySelector('#slideContainer');
+    if(slideTab.classList.contains('active')) {
+      if(window.orientation == -90 || window.orientation == 90) {
+        document.querySelector('.header').style.display = "none";
+        document.querySelector('.info').style.display = "none";
+        document.querySelector('.typeTab').style.display = "none";
+        document.querySelector('body').style.backgroundColor = "#c9c9c9";
+        slideBox.style.setProperty('width', 'calc((16 / 9) * 100vh)');
+        slideBox.style.height = "100vh";
+        slideBox.style.marginBottom = "0px";
+        slideContainer.style.setProperty('width', 'calc(((16 / 9) * 100vh) - 6px)');
+        slideContainer.style.setProperty('height', 'calc(100vh - 6px)');
+      }
+      else{
+        document.querySelector('.header').style.display = "flex";
+        document.querySelector('.info').style.display = "flex";
+        document.querySelector('.typeTab').style.display = "block";
+        document.querySelector('body').style.backgroundColor = "#FAFBFC";
+        slideBox.style.width = "339px"
+        adjust_size(windowHeight);
+        slideBox.style.marginBottom = "30px";
+        slideContainer.style.width = " 333px";
+        slideContainer.style.height = "187.31px";
+      }
+    }
+  }
+}, false);
