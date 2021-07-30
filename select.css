@@ -306,6 +306,7 @@ ul {
   width: 333px;
   height: 434px;
   overflow-y: scroll;
+  scrollbar-width: thin;
 }
 .voteListBox::-webkit-scrollbar {
   display: none;
