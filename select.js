@@ -518,8 +518,7 @@ function adjust_size(height) {
 
 // 슬라이드 탭 모바일 회전
 window.addEventListener('resize', function () {
-	if(is_mobile() && slideTab.classList.contains('active')) {
-    var slideTab = document.getElementById('pills-slide');
+	if(is_mobile() && document.getElementById('pills-slide').classList.contains('active')) {
     var slideBox = document.querySelector('.slide');
     var slideContainer = document.querySelector('#slideContainer');
     if(window.matchMedia('(orientation: landscape)').matches){
