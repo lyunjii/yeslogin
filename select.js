@@ -437,12 +437,18 @@ function chatbox(canvas){
 
   background.onload=function(){
     context.drawImage(background, 357, 17, 750, 60);
-    context.drawImage(profile_image, 384, 30, 34, 34)
+    context.save();
+    context.beginPath();
+    context.arc(401, 47, 17, 0, Math.PI * 2, true);
+    context.closePath();
+    context.clip();
+    context.drawImage(profile_image, 384, 30, 34, 34);
+    context.restore();
     context.fillText(profile.getName(), 426, 35);
     context.fillText(msg, 501, 35);
   };
 
-//  canvas.style.display = "block";
+  // canvas.style.display = "block";
 }
 
 function upload_image(){
