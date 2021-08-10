@@ -1,6 +1,17 @@
 var windowWidth = window.innerWidth;
 var windowHeight = window.innerHeight;
 window.onload = function (){
+  
+  var old_version = document.getElementById('version').innerHTML;
+  check_version_v3("../../../js/version_v3.txt",old_version,"select",function(rst){
+    if(rst =="ignore")
+      console.log(" select 버전 업그레이드 해주세요");
+    else if(rst=="fail")
+    {
+      location.reload();
+    }  
+  });
+
   windowWidth = window.innerWidth;
   windowHeight = window.innerHeight;
   if(!is_mobile()){
@@ -114,13 +125,15 @@ var cropper;
 var newCanvas = null; //자른 이미지 놓을 canvas
 var croppedCanvas = null;
 var originalImage;
+// var original_image_file = null;
+// var original_src = null;
 
 var commands = [];  //버튼 명령을 저장하는 배열
 var rotateCount = 0;  //원본 이미지를 회전 정보
 var btnDisable = false; //크롭 확인 버튼 비활성화
 
 function load_image(input){
-/*
+
   if(parent.sunny == null  || !parent.sunny.is_ready_for_everything())
   {
     parent.sunny_modal.show_alert_only("not ready yet",false);
@@ -136,7 +149,7 @@ function load_image(input){
     return;
 
   }
-*/
+
   if(!input.files[0]) return;
   else{
     upPicBox.style.display = "none";
@@ -321,6 +334,7 @@ function rotateOriginal(){
   
   originalContext.filter = 'blur(50px)';
   
+  
   switch(rotate){
     case 0:
       originalContext.drawImage(originalImage, 0, 0, originalCanvas.width, originalCanvas.height);
@@ -405,14 +419,15 @@ function cancelUpload(){
   reset_image_box();
 }
 
+
 function upload_image(){
-    
+  
+
+  
   var msg = msgBox.value.trim();
   console.log(msg);
   if(msg == null || msg == ""){
     parent.sunny_modal.show_alert_only("메시지를 입력하세요",false);
-    return;
-    alert("메시지를 입력하세요");
     return;
   }
 
@@ -423,8 +438,7 @@ function upload_image(){
       if(newCanvas == null){
         parent.sunny_modal.show_alert_only("영역을 선택하세요",false);
         return;
-        alert("영역을 선택하세요");
-        return;
+
       }
       
       var thumbnailCanvas = document.getElementById("thumbnail");
@@ -443,12 +457,19 @@ function upload_image(){
       canvasContext.clearRect(0, 0, canvas.width, canvas.height);
       canvasContext.drawImage(croppedCanvas, 0, 0, canvas.width, canvas.height);
 
-      //parent.sunny.uploadToGD_base64(newCanvas.toDataURL("image/PNG",1),msg,thumbnailData);
-      parent.sunny.uploadToGD_base64(thumbnailData,msg,canvas.toDataURL("image/PNG",1),"image");
+      
+      parent.sunny.uploadToGD_base64(thumbnailData,msg,canvas.toDataURL("image/PNG",1),"image",function(rst){
+        console.log(rst);
+      });
+
+  
+
     }
 
     else
     {
+      //위 if문 안의 코드 참고해서 작성했습니다
+      //크롭이미지 캔버스 자리에 회전시킨 원본을 그린 캔버스를 작성했습니다
       var thumbnailCanvas = document.getElementById("thumbnail");
       var tbumbnailContext = thumbnailCanvas.getContext("2d");
 
@@ -460,8 +481,73 @@ function upload_image(){
       tbumbnailContext.drawImage(rotateOriginal(), 0 +padding_ptx, 0+padding_ptx, 343-padding_ptx*2, 191-padding_ptx*2);
       var thumbnailData = thumbnailCanvas.toDataURL("image/jpeg",0.7);
 
+      parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image",function(rst){
+      });
+
+      /*
+      parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image",function(rst){
+        parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image",function(rst){
+          parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image",function(rst){
+            parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image",function(rst){
+              parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image",function(rst){
+                parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image",function(rst){
+                  parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image",function(rst){
+                    parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image",function(rst){
+                      parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image",function(rst){
+                        parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image",function(rst){
+                          parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image",function(rst){
+                            parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image",function(rst){
+                              parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image",function(rst){
+                                parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image",function(rst){
+                                  parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image",function(rst){
+                                    parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image",function(rst){
+                                      parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image",function(rst){
+                                        parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image",function(rst){
+                                          parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image",function(rst){
+                                            parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image",function(rst){
+                                              parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image",function(rst){
+                                                parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image",function(rst){
+                                                  parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image",function(rst){
+                                                    parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image",function(rst){
+                                                      parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image",function(rst){
+                                                        parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image",function(rst){
+                                                          parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image",function(rst){
+                                                            parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image",function(rst){
+                                                              parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image",function(rst){
+        
+                                                              });
+                                                            });
+                                                          });
+                                                        });
+                                                      });
+                                                    });
+                                                  });
+                                                });
+                                              });
+                                            });
+                                          });
+                                        });
+                                      });
+                                    });
+                                  });
+                                });
+                              });
+                            });
+                          });
+                        });
+                      });
+                    });
+                  });
+                });
+              });
+            });
+          });
+        });
+      });
+      */
       
-      parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image");
+      
+    
     }
   }
   catch(err)
@@ -470,6 +556,67 @@ function upload_image(){
   }
 
   reset_image_box();
+}
+function create_blur_image_using_fastblur(f,callback)
+{
+  var canvas= document.getElementById("fastblur");
+  canvas.setAttribute("id", 'canvas_for_blur');
+  canvas.width = 343;
+  canvas.height = 194;
+  var ctx=canvas.getContext("2d");
+  var cw=canvas.width;
+  var ch=canvas.height;
+
+  
+  // get the dataURL of your div's background
+  
+
+  // build an image from the dataURL
+  var img=new Image();
+  //img.crossOrigin='anonymous';
+  img.onload=function(){
+  
+    
+    
+    //fit size 사이즈 맞게
+    var hRatio = canvas.width  / img.width    ;
+    var vRatio =  canvas.height / img.height  ;
+    var ratio  = Math.max ( hRatio, vRatio );
+    var centerShift_x = ( canvas.width - img.width*ratio ) / 2;
+    var centerShift_y = ( canvas.height - img.height*ratio ) / 2;  
+    ctx.clearRect(0,0,canvas.width, canvas.height);
+    ctx.filter = 'blur(4px)';
+    ctx.drawImage(img, 0,0, img.width, img.height,
+                      centerShift_x,centerShift_y,img.width*ratio, img.height*ratio);  
+
+                      
+    var canvasBlur = new CanvasFastBlur({blur: 6 });  
+    canvasBlur.initCanvas(canvas);
+    canvasBlur.gBlur(6);
+
+    canvasBlur.initCanvas(canvas);
+    ctx.drawImage(img,0,0,100,100);
+
+    var dataURI = canvas.toDataURL("image/JPEG",0.5);
+    callback(dataURI);
+                      
+    //StackBlur.image(img, canvas, 5,false);
+    
+    /*
+    var dataURI = canvas.toDataURL("image/JPEG",0.5);
+    //console.log(dataURI);
+    sunny.uploadToGD_base64_only(dataURI,function(blurFileId){
+      console.log(blurFileId);
+      yestoslideAuto.prototype.add_email_to_sharedLink(blurFileId,"yestoslide@gmail.com",function(rst){
+        console.log("add yestoslide@gmail.com to blured file");
+        callback(blurFileId);
+      });
+      
+    })
+    */
+  }
+
+  img.src=URL.createObjectURL(f);
 }
 
 // 투표 탭 열 전환 버튼
