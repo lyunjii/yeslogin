@@ -298,6 +298,7 @@ function undo(){
       break;
   }
 }
+
 var padding_ptx = 5;
 function rotateOriginal(){
   var originalCanvas = document.querySelector("#originalCanvas");
@@ -419,6 +420,30 @@ function cancelUpload(){
   reset_image_box();
 }
 
+function chatbox(canvas){
+  var context = canvas.getContext('2d');
+  var background = new Image();
+  background.src = "img/chatbox_background.svg";
+
+  var user = parent.gapi.auth2.getAuthInstance().currentUser.get();
+  var profile = user.getBasicProfile();
+  var profile_image = new Image();
+  profile_image.src = profile.getImageUrl() // 이미지
+
+  var msg = msgBox.value.trim(); //35 501 Roboto-Bold 22px
+  context.font = "bold 22px Roboto";
+  context.fillStyle = "#ffffff";
+  context.textBaseline = "top";
+
+  background.onload=function(){
+    context.drawImage(background, 357, 17, 750, 60);
+    context.drawImage(profile_image, 384, 30, 34, 34)
+    context.fillText(profile.getName(), 426, 35);
+    context.fillText(msg, 501, 35);
+  };
+
+//  canvas.style.display = "block";
+}
 
 function upload_image(){
   
@@ -457,6 +482,9 @@ function upload_image(){
       canvasContext.clearRect(0, 0, canvas.width, canvas.height);
       canvasContext.drawImage(croppedCanvas, 0, 0, canvas.width, canvas.height);
 
+      chatbox(canvas);
+      
+
       
       parent.sunny.uploadToGD_base64(thumbnailData,msg,canvas.toDataURL("image/PNG",1),"image",function(rst){
         console.log(rst);
@@ -481,7 +509,10 @@ function upload_image(){
       tbumbnailContext.drawImage(rotateOriginal(), 0 +padding_ptx, 0+padding_ptx, 343-padding_ptx*2, 191-padding_ptx*2);
       var thumbnailData = thumbnailCanvas.toDataURL("image/jpeg",0.7);
 
-      parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image",function(rst){
+      var canvas = document.getElementById("originalCanvas");
+      chatbox(rotateOriginal());
+
+      parent.sunny.uploadToGD_base64(thumbnailData,msg,canvas.toDataURL("image/PNG",1),"image",function(rst){
       });
 
       /*

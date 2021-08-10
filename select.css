@@ -12,7 +12,7 @@
   padding: 0px;
   margin: 0px;
   box-sizing: border-box;
-  font-family: "NanumSquareRound";
+  font-family: "NanumSquareRound", "Roboto", sans-serif;
   font-weight: bold;
 }
 body {
@@ -322,6 +322,7 @@ ul {
   border-right: #707070 1px solid;
   border-bottom: #707070 1px solid;
   position: relative;
+  overflow: hidden;
 }
 /*  vote mobile column 1  */
 .mVote2 .voteImage {
@@ -343,7 +344,6 @@ ul {
 .pcVote2 .voteImage {
   width: 267px;
   height: 151.31px;
-  border-radius: 10px 10px 0px 0px;
 }
 .pcVote2 .image_user {
   width: 33px;
@@ -362,7 +362,6 @@ ul {
 .pcVote1 .voteImage {
   width: 545px;
   height: 307px;
-  border-radius: 10px 10px 0px 0px;
 }
 .pcVote1 .image_user {
   width: 70px;
