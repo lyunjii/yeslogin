@@ -526,7 +526,6 @@ function upload_image(){
       tbumbnailContext.drawImage(rotateOriginal(), 0 +padding_ptx, 0+padding_ptx, 343-padding_ptx*2, 191-padding_ptx*2);
       var thumbnailData = thumbnailCanvas.toDataURL("image/jpeg",0.7);
 
-      var canvas = document.getElementById("originalCanvas");
       chatbox(rotateOriginal());
 
       parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image",function(rst){
