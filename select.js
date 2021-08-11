@@ -163,8 +163,10 @@ function load_image(input){
     original_image_file = file;
     newImage.src = URL.createObjectURL(file);
     showPic.appendChild(newImage);
+
     chatbox_background = new Image();
     chatbox_background.src = "img/chatbox_background.svg";
+    // chatbox_background.crossOrigin = 'Anonymous';
 
     //원본 이미지의 정보 저장
     var fileReader = new FileReader();
