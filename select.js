@@ -431,7 +431,8 @@ function chatbox(canvas){
   profile_image.src = profile.getImageUrl() // 이미지
 
   var msg = msgBox.value.trim(); //35 501 Roboto-Bold 22px
-  context.font = "bold 22px Roboto";
+  
+  context.font = "bold 22px sans-serif";
   context.fillStyle = "#ffffff";
   context.textBaseline = "top";
 
@@ -445,10 +446,20 @@ function chatbox(canvas){
     context.drawImage(profile_image, 384, 30, 34, 34);
     context.restore();
     context.fillText(profile.getName(), 426, 35);
+    var msg_width = context.measureText(msg).width;
+    if(msg_width > 570){
+      var len = msg.length;
+      var ellipsis = '...';
+      var ellipsis_width = context.measureText(ellipsis).width;
+      while(msg_width >= 570 - ellipsis_width && len-- > 0){
+        msg = msg.substring(0, len);
+        msg_width = context.measureText(msg).width;
+      } 
+      msg = msg + ellipsis;
+    }
     context.fillText(msg, 501, 35);
   };
 
-  // canvas.style.display = "block";
 }
 
 function upload_image(){
