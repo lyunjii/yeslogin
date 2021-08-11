@@ -128,6 +128,8 @@ var originalImage;
 // var original_image_file = null;
 // var original_src = null;
 
+var chatbox_background;
+
 var commands = [];  //버튼 명령을 저장하는 배열
 var rotateCount = 0;  //원본 이미지를 회전 정보
 var btnDisable = false; //크롭 확인 버튼 비활성화
@@ -161,6 +163,8 @@ function load_image(input){
     original_image_file = file;
     newImage.src = URL.createObjectURL(file);
     showPic.appendChild(newImage);
+    chatbox_background = new Image();
+    chatbox_background.src = "img/chatbox_background.svg";
 
     //원본 이미지의 정보 저장
     var fileReader = new FileReader();
@@ -422,8 +426,6 @@ function cancelUpload(){
 
 function chatbox(canvas){
   var context = canvas.getContext('2d');
-  var background = new Image();
-  background.src = "img/chatbox_background.svg";
 
   var user = parent.gapi.auth2.getAuthInstance().currentUser.get();
   var profile = user.getBasicProfile();
@@ -436,30 +438,27 @@ function chatbox(canvas){
   context.fillStyle = "#ffffff";
   context.textBaseline = "top";
 
-  background.onload=function(){
-    context.drawImage(background, 357, 17, 750, 60);
-    context.save();
-    context.beginPath();
-    context.arc(401, 47, 17, 0, Math.PI * 2, true);
-    context.closePath();
-    context.clip();
-    context.drawImage(profile_image, 384, 30, 34, 34);
-    context.restore();
-    context.fillText(profile.getName(), 426, 35);
-    var msg_width = context.measureText(msg).width;
-    if(msg_width > 570){
-      var len = msg.length;
-      var ellipsis = '...';
-      var ellipsis_width = context.measureText(ellipsis).width;
-      while(msg_width >= 570 - ellipsis_width && len-- > 0){
-        msg = msg.substring(0, len);
-        msg_width = context.measureText(msg).width;
-      } 
-      msg = msg + ellipsis;
-    }
-    context.fillText(msg, 501, 35);
-  };
-
+  context.drawImage(chatbox_background, 357, 17, 750, 60);
+  context.save();
+  context.beginPath();
+  context.arc(401, 47, 17, 0, Math.PI * 2, true);
+  context.closePath();
+  context.clip();
+  context.drawImage(profile_image, 384, 30, 34, 34);
+  context.restore();
+  context.fillText(profile.getName(), 426, 35);
+  var msg_width = context.measureText(msg).width;
+  if(msg_width > 570){
+    var len = msg.length;
+    var ellipsis = '...';
+    var ellipsis_width = context.measureText(ellipsis).width;
+    while(msg_width >= 570 - ellipsis_width && len-- > 0){
+      msg = msg.substring(0, len);
+      msg_width = context.measureText(msg).width;
+    } 
+    msg = msg + ellipsis;
+  }
+  context.fillText(msg, 501, 35);
 }
 
 function upload_image(){
@@ -499,10 +498,9 @@ function upload_image(){
       canvasContext.clearRect(0, 0, canvas.width, canvas.height);
       canvasContext.drawImage(croppedCanvas, 0, 0, canvas.width, canvas.height);
 
-      chatbox(canvas);
-      
 
-      
+      chatbox(canvas);
+
       parent.sunny.uploadToGD_base64(thumbnailData,msg,canvas.toDataURL("image/PNG",1),"image",function(rst){
         console.log(rst);
       });
