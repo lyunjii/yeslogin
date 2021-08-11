@@ -529,7 +529,7 @@ function upload_image(){
       var canvas = document.getElementById("originalCanvas");
       chatbox(rotateOriginal());
 
-      parent.sunny.uploadToGD_base64(thumbnailData,msg,canvas.toDataURL("image/PNG",1),"image",function(rst){
+      parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image",function(rst){
       });
 
       /*
