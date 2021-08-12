@@ -487,9 +487,9 @@ function chatbox(canvas){
   var ellipsis_width = context.measureText(ellipsis).width;
 
   var name_width = context.measureText(profile_name).width;
-  var name_len = profile_name.length;
-  if(name_len > 3){
-    while(name_width >= 67 && name_len-- > 0){
+  if(name_width > 78){
+    var name_len = profile_name.length;
+    while(name_width >= 78 && name_len-- > 0){
       profile_name = profile_name.substring(0, name_len);
       name_width = context.measureText(profile_name).width;
     } 
@@ -498,15 +498,15 @@ function chatbox(canvas){
   context.fillText(profile_name, 426, 35);
 
   var msg_width = context.measureText(msg).width;
-  if(msg_width > 570){
+  if(msg_width > 568){
     var msg_len = msg.length;
-    while(msg_width >= 570 - ellipsis_width && msg_len-- > 0){
+    while(msg_width >= 568 - ellipsis_width && msg_len-- > 0){
       msg = msg.substring(0, msg_len);
       msg_width = context.measureText(msg).width;
     } 
     msg += ellipsis;
   }
-  context.fillText(msg, 786 - (msg_width/2), 35);
+  context.fillText(msg, 796 - (msg_width/2), 35);
 }
 
 function upload_image(){
