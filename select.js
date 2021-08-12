@@ -436,7 +436,7 @@ function chatbox(canvas){
 
   var msg = msgBox.value.trim(); //35 501 Roboto-Bold 22px
   
-  context.font = "bold 22px sans-serif";
+  context.font = "bold 22px Roboto";
   context.fillStyle = "#ffffff";
   context.textBaseline = "top";
 
@@ -526,8 +526,8 @@ function upload_image(){
       tbumbnailContext.drawImage(rotateOriginal(), 0 +padding_ptx, 0+padding_ptx, 343-padding_ptx*2, 191-padding_ptx*2);
       var thumbnailData = thumbnailCanvas.toDataURL("image/jpeg",0.7);
 
-      chatbox(rotateOriginal());
       var canvas = document.getElementById('originalCanvas');
+      chatbox(canvas);
 
       parent.sunny.uploadToGD_base64(thumbnailData,msg,canvas.toDataURL("image/PNG",1),"image",function(rst){
       });
