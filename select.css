@@ -299,7 +299,8 @@ ul {
   font-size: 10px;
   font-weight: lighter;
 }
-.voteImage {
+.voteImage,
+.voteListBox iframe {
   width: 331px;
   height: 186px;
 }
@@ -325,7 +326,8 @@ ul {
   overflow: hidden;
 }
 /*  vote mobile column 1  */
-.mVote2 .voteImage {
+.mVote2 .voteImage,
+.mVote2 iframe {
   width: 165px;
   height: 94px;
 }
@@ -341,7 +343,8 @@ ul {
   height: 130px;
 }
 /*  vote pc column 2  */
-.pcVote2 .voteImage {
+.pcVote2 .voteImage,
+.pcVote2 iframe {
   width: 267px;
   height: 151.31px;
 }
@@ -359,7 +362,8 @@ ul {
   margin: 10px 0px 0px 9px;
 }
 /*  vote pc column 1  */
-.pcVote1 .voteImage {
+.pcVote1 .voteImage,
+.pcVote1 iframe {
   width: 545px;
   height: 307px;
 }
@@ -383,7 +387,7 @@ ul {
   width: 547px;
   height: 401px;
   border-radius: 10px;
-  margin: 10px 10px 0px 9px;
+  margin: 10px 0px 0px 9px;
 }
 /*   vote pc   */
 .pcVote {
