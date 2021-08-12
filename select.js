@@ -165,8 +165,8 @@ function load_image(input){
     showPic.appendChild(newImage);
 
     chatbox_background = new Image();
+    chatbox_background.crossOrigin = 'Anonymous';
     chatbox_background.src = "img/chatbox_background.svg";
-    // chatbox_background.crossOrigin = 'Anonymous';
 
     //원본 이미지의 정보 저장
     var fileReader = new FileReader();
@@ -434,7 +434,8 @@ function chatbox(canvas){
   var profile_image = new Image();
   profile_image.src = profile.getImageUrl() // 이미지
 
-  var msg = msgBox.value.trim(); //35 501 Roboto-Bold 22px
+  var profile_name = profile.getName();
+  var msg = msgBox.value.trim(); //501 35 Roboto-Bold 22px
   
   context.font = "bold 22px Roboto";
   context.fillStyle = "#ffffff";
@@ -448,19 +449,31 @@ function chatbox(canvas){
   context.clip();
   context.drawImage(profile_image, 384, 30, 34, 34);
   context.restore();
-  context.fillText(profile.getName(), 426, 35);
+
+  var ellipsis = '...';
+  var ellipsis_width = context.measureText(ellipsis).width;
+
+  var name_width = context.measureText(profile_name).width;
+  var name_len = profile_name.length;
+  if(name_len > 3){
+    while(name_width >= 67 && name_len-- > 0){
+      profile_name = profile_name.substring(0, name_len);
+      name_width = context.measureText(profile_name).width;
+    } 
+    profile_name += ellipsis;
+  }
+  context.fillText(profile_name, 426, 35);
+
   var msg_width = context.measureText(msg).width;
   if(msg_width > 570){
-    var len = msg.length;
-    var ellipsis = '...';
-    var ellipsis_width = context.measureText(ellipsis).width;
-    while(msg_width >= 570 - ellipsis_width && len-- > 0){
-      msg = msg.substring(0, len);
+    var msg_len = msg.length;
+    while(msg_width >= 570 - ellipsis_width && msg_len-- > 0){
+      msg = msg.substring(0, msg_len);
       msg_width = context.measureText(msg).width;
     } 
-    msg = msg + ellipsis;
+    msg += ellipsis;
   }
-  context.fillText(msg, 501, 35);
+  context.fillText(msg, 786 - (msg_width/2), 35);
 }
 
 function upload_image(){
@@ -507,6 +520,7 @@ function upload_image(){
         console.log(rst);
       });
 
+      canvasContext.clearRect(0, 0, canvas.width, canvas.height);
   
 
     }
@@ -531,6 +545,8 @@ function upload_image(){
 
       parent.sunny.uploadToGD_base64(thumbnailData,msg,canvas.toDataURL("image/PNG",1),"image",function(rst){
       });
+
+      canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
 
       /*
       parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image",function(rst){
