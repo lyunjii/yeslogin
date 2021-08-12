@@ -12,6 +12,9 @@ window.onload = function (){
     }  
   });
 
+  setTimeout(() => {
+    make_base64_from_profileImage();
+  }, 5000); 
   windowWidth = window.innerWidth;
   windowHeight = window.innerHeight;
   if(!is_mobile()){
@@ -93,6 +96,20 @@ window.onload = function (){
   else{
     adjust_size(windowHeight);
   }
+}
+
+var profileImageBase64 = "";
+function make_base64_from_profileImage()
+{
+  var user = parent.gapi.auth2.getAuthInstance().currentUser.get();
+  var profile = user.getBasicProfile();
+  
+  
+  parent.sunny.getBase64Image(profile.getImageUrl(),function(imgData){
+
+    profileImageBase64 = "data:image/png;base64,"+imgData;
+    console.log("profile base64 ",profileImageBase64);
+  });
 }
 
 function is_mobile()
@@ -432,7 +449,20 @@ function chatbox(canvas){
   var user = parent.gapi.auth2.getAuthInstance().currentUser.get();
   var profile = user.getBasicProfile();
   var profile_image = new Image();
-  profile_image.src = profile.getImageUrl() // 이미지
+  
+  /*
+  parent.sunny.getBase64Image(profile.getImageUrl(),function(imgData){
+
+    imgData = "data:image/png;base64,"+imgData;
+    console.log("data:image/png;base64,"+imgData);
+
+    profile_image.setAttribute('src', imgData);
+
+  });
+  return;
+  */
+  //profile_image.src = profile.getImageUrl(); // 이미지
+  profile_image.setAttribute('src', profileImageBase64);
 
   var profile_name = profile.getName();
   var msg = msgBox.value.trim(); //501 35 Roboto-Bold 22px
@@ -487,7 +517,7 @@ function upload_image(){
     return;
   }
 
-  try{
+  //try{
     if(toggleBtn.getAttribute('value') == 'on')
     {
       //영역을 선택하지 않았을 때
@@ -517,10 +547,11 @@ function upload_image(){
       chatbox(canvas);
 
       parent.sunny.uploadToGD_base64(thumbnailData,msg,canvas.toDataURL("image/PNG",1),"image",function(rst){
+        canvasContext.clearRect(0, 0, canvas.width, canvas.height);
         console.log(rst);
       });
 
-      canvasContext.clearRect(0, 0, canvas.width, canvas.height);
+     
   
 
     }
@@ -544,9 +575,10 @@ function upload_image(){
       chatbox(canvas);
 
       parent.sunny.uploadToGD_base64(thumbnailData,msg,canvas.toDataURL("image/PNG",1),"image",function(rst){
+        canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
       });
 
-      canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+      
 
       /*
       parent.sunny.uploadToGD_base64(thumbnailData,msg,rotateOriginal().toDataURL("image/PNG",1),"image",function(rst){
@@ -613,10 +645,10 @@ function upload_image(){
       
     
     }
-  }
-  catch(err)
+  //}
+  //catch(err)
   {
-    console.log(err.message);
+    //console.log(err.message);
   }
 
   reset_image_box();
