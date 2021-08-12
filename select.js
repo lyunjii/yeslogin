@@ -109,6 +109,8 @@ function make_base64_from_profileImage()
 
     profileImageBase64 = "data:image/png;base64,"+imgData;
     console.log("profile base64 ",profileImageBase64);
+    profile_image = new Image();
+    profile_image.setAttribute('src', profileImageBase64);
   });
 }
 
@@ -146,6 +148,7 @@ var originalImage;
 // var original_src = null;
 
 var chatbox_background;
+var profile_image;
 
 var commands = [];  //버튼 명령을 저장하는 배열
 var rotateCount = 0;  //원본 이미지를 회전 정보
@@ -448,7 +451,7 @@ function chatbox(canvas){
 
   var user = parent.gapi.auth2.getAuthInstance().currentUser.get();
   var profile = user.getBasicProfile();
-  var profile_image = new Image();
+  // var profile_image = new Image();
   
   /*
   parent.sunny.getBase64Image(profile.getImageUrl(),function(imgData){
@@ -461,8 +464,8 @@ function chatbox(canvas){
   });
   return;
   */
-  //profile_image.src = profile.getImageUrl(); // 이미지
-  profile_image.setAttribute('src', profileImageBase64);
+  // profile_image.src = profile.getImageUrl(); // 이미지
+  // profile_image.setAttribute('src', profileImageBase64);
 
   var profile_name = profile.getName();
   var msg = msgBox.value.trim(); //501 35 Roboto-Bold 22px
