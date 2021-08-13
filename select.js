@@ -477,36 +477,36 @@ function chatbox(canvas){
   context.drawImage(chatbox_background, 357, 17, 750, 60);
   context.save();
   context.beginPath();
-  context.arc(401, 47, 17, 0, Math.PI * 2, true);
+  context.arc(47, 47, 17, 0, Math.PI * 2, true);
   context.closePath();
   context.clip();
-  context.drawImage(profile_image, 384, 30, 34, 34);
+  context.drawImage(profile_image, 30, 30, 34, 34);
   context.restore();
 
   var ellipsis = '...';
   var ellipsis_width = context.measureText(ellipsis).width;
 
-  var name_width = context.measureText(profile_name).width;
-  if(name_width > 78){
-    var name_len = profile_name.length;
-    while(name_width >= 78 && name_len-- > 0){
-      profile_name = profile_name.substring(0, name_len);
-      name_width = context.measureText(profile_name).width;
-    } 
-    profile_name += ellipsis;
-  }
-  context.fillText(profile_name, 426, 35);
+  // var name_width = context.measureText(profile_name).width;
+  // if(name_width > 78){
+  //   var name_len = profile_name.length;
+  //   while(name_width >= 78 && name_len-- > 0){
+  //     profile_name = profile_name.substring(0, name_len);
+  //     name_width = context.measureText(profile_name).width;
+  //   } 
+  //   profile_name += ellipsis;
+  // } 384 426
+  context.fillText(profile_name, 72, 35);
 
   var msg_width = context.measureText(msg).width;
-  if(msg_width > 568){
+  if(msg_width > 696){
     var msg_len = msg.length;
-    while(msg_width >= 568 - ellipsis_width && msg_len-- > 0){
+    while(msg_width >= 696 - ellipsis_width && msg_len-- > 0){
       msg = msg.substring(0, msg_len);
       msg_width = context.measureText(msg).width;
     } 
     msg += ellipsis;
   }
-  context.fillText(msg, 796 - (msg_width/2), 35);
+  context.fillText(msg, 732 - (msg_width/2), 35);
 }
 
 function upload_image(){
