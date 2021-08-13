@@ -302,7 +302,7 @@ ul {
 .voteImage,
 .voteListBox iframe {
   width: 331px;
-  height: 186px;
+  height: 186.1875px;
 }
 .image_user {
   width: 37px;
@@ -311,7 +311,7 @@ ul {
   margin-right: 4px;
 }
 .imageInfo {
-  height: 58px;
+  height: 57.8125px;
   display: flex;
   align-items: center;
   padding: 5px 9px;
@@ -329,14 +329,14 @@ ul {
 .mVote2 .voteImage,
 .mVote2 iframe {
   width: 165px;
-  height: 94px;
+  height: 92.8125px;
 }
 .mVote2 .image_user {
   width: 21px;
   height: 21px;
 }
 .mVote2 .imageInfo {
-  height: 36px;
+  height: 37.1875px;
 }
 .mVote2 .voteElement {
   width: 166px;
@@ -359,13 +359,13 @@ ul {
   width: 269px;
   height: 197px;
   border-radius: 10px;
-  margin: 10px 0px 0px 9px;
+  margin: 0px 0px 10px 9px;
 }
 /*  vote pc column 1  */
 .pcVote1 .voteImage,
 .pcVote1 iframe {
   width: 545px;
-  height: 307px;
+  height: 306.5625px;
 }
 .pcVote1 .image_user {
   width: 70px;
@@ -380,14 +380,14 @@ ul {
   margin-bottom: 25px;
 }
 .pcVote1 .imageInfo {
-  height: 94px;
+  height: 94.4375px;
   padding: 0px;
 }
 .pcVote1 .voteElement {
   width: 547px;
   height: 401px;
   border-radius: 10px;
-  margin: 10px 0px 0px 9px;
+  margin: 0px 0px 10px 9px;
 }
 /*   vote pc   */
 .pcVote {
@@ -395,7 +395,7 @@ ul {
   height: 651px;
 }
 .pcVote .voteList {
-  margin-right: 11px;
+  margin: 10px 11px 0px 0px;
   border: none;
 }
 .pcVote .voteElement {
