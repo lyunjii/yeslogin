@@ -451,62 +451,59 @@ function chatbox(canvas){
 
   var user = parent.gapi.auth2.getAuthInstance().currentUser.get();
   var profile = user.getBasicProfile();
-  // var profile_image = new Image();
-  
-  /*
-  parent.sunny.getBase64Image(profile.getImageUrl(),function(imgData){
-
-    imgData = "data:image/png;base64,"+imgData;
-    console.log("data:image/png;base64,"+imgData);
-
-    profile_image.setAttribute('src', imgData);
-
-  });
-  return;
-  */
-  // profile_image.src = profile.getImageUrl(); // 이미지
-  // profile_image.setAttribute('src', profileImageBase64);
-
   var profile_name = profile.getName();
-  var msg = msgBox.value.trim(); //501 35 Roboto-Bold 22px
+  var msg = msgBox.value.trim();
   
   context.font = "bold 22px Roboto";
   context.fillStyle = "#ffffff";
   context.textBaseline = "top";
 
-  context.drawImage(chatbox_background, 357, 17, 750, 60);
+  /* profile background */
+  var x = 17;
+  var y = 17;
+  var radius = 10;
+  var width = context.measureText(profile_name).width + 82;
+  var height = 56;
   context.save();
   context.beginPath();
-  context.arc(47, 47, 17, 0, Math.PI * 2, true);
+  context.fillStyle = 'rgba(0, 0, 0, 0.5)';
+  context.moveTo(x, y + radius);
+  context.lineTo(x, y + height - radius);
+  context.arcTo(x, y + height, x + radius, y + height, radius);
+  context.lineTo(x + width - radius, y + height);
+  context.arcTo(x + width, y + height, x + width, y + height-radius, radius);
+  context.lineTo(x + width, y + radius);
+  context.arcTo(x + width, y, x + width - radius, y, radius);
+  context.lineTo(x + radius, y);
+  context.arcTo(x, y, x, y + radius, radius);
+  context.closePath();
+  context.fill();
+  context.restore();
+  /* profile image */
+  context.save();
+  context.beginPath();
+  context.arc(50, 45, 17, 0, Math.PI * 2, true);
   context.closePath();
   context.clip();
-  context.drawImage(profile_image, 30, 30, 34, 34);
+  context.drawImage(profile_image, 33, 28, 34, 34);
   context.restore();
-
-  var ellipsis = '...';
-  var ellipsis_width = context.measureText(ellipsis).width;
-
-  // var name_width = context.measureText(profile_name).width;
-  // if(name_width > 78){
-  //   var name_len = profile_name.length;
-  //   while(name_width >= 78 && name_len-- > 0){
-  //     profile_name = profile_name.substring(0, name_len);
-  //     name_width = context.measureText(profile_name).width;
-  //   } 
-  //   profile_name += ellipsis;
-  // } 384 426
+  /* profile name */
   context.fillText(profile_name, 72, 35);
-
+  /* chatbox backgound */
+  context.drawImage(chatbox_background, 413, 17, 637, 60);
+  /* message */
   var msg_width = context.measureText(msg).width;
-  if(msg_width > 696){
+  if(msg_width > 575){
+    var ellipsis = '...';
+    var ellipsis_width = context.measureText(ellipsis).width;
     var msg_len = msg.length;
-    while(msg_width >= 696 - ellipsis_width && msg_len-- > 0){
+    while(msg_width >= 575 - ellipsis_width && msg_len-- > 0){
       msg = msg.substring(0, msg_len);
       msg_width = context.measureText(msg).width;
     } 
     msg += ellipsis;
   }
-  context.fillText(msg, 732 - (msg_width/2), 35);
+  context.fillText(msg, 731.5 - (msg_width/2), 35);
 }
 
 function upload_image(){
