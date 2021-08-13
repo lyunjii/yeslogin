@@ -488,7 +488,7 @@ function chatbox(canvas){
   context.drawImage(profile_image, 33, 28, 34, 34);
   context.restore();
   /* profile name */
-  context.fillText(profile_name, 72, 35);
+  context.fillText(profile_name, 75, 33);
   /* chatbox backgound */
   context.drawImage(chatbox_background, 413, 17, 637, 60);
   /* message */
