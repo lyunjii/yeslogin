@@ -144,8 +144,6 @@ var cropper;
 var newCanvas = null; //자른 이미지 놓을 canvas
 var croppedCanvas = null;
 var originalImage;
-// var original_image_file = null;
-// var original_src = null;
 
 var chatbox_background;
 var profile_image;
@@ -219,13 +217,12 @@ function edit_image(){
   const image = document.getElementById('newPic');
   cropper = new Cropper(image, {
     viewMode: 1,
-    dragMode: 'move', //cropper 바깥에서 마우스로 사진 이동
-    aspectRatio: 16 / 9, //cropper 비율
-    //(중앙 표시, 그리드부분 밝게, 배경 체크무늬) 없게
+    dragMode: 'move',
+    aspectRatio: 16 / 9,
     center: false,
     highlight: false,
     background: false,
-    autoCropArea: 1, //초기 cropper 크기
+    autoCropArea: 1,
     crop(event) {},
   });
 }
@@ -814,4 +811,11 @@ function is_tablet(){
     return true;
   }
   return false;
+}
+
+function vote() {
+  var iframes = document.querySelectorAll(".voteElement iframe");
+  for( var i = 0; i < iframes.length; i++) {
+      iframes[i].setAttribute('scrolling', 'no');
+  }
 }
