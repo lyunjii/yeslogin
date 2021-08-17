@@ -78,7 +78,7 @@ window.onload = function (){
 
     var toggleCol = document.querySelector('#toggleCol');
     toggleCol.setAttribute('value', '2');
-    toggleCol.setAttribute('src', '/img/1row.svg');
+    toggleCol.setAttribute('src', '../img/1row.svg');
     toggleCol.style.top = "7px";
     toggleCol.style.right = "3px";
 
@@ -184,7 +184,7 @@ function load_image(input){
 
     chatbox_background = new Image();
     chatbox_background.crossOrigin = 'Anonymous';
-    chatbox_background.src = "/img/chatbox_background.svg";
+    chatbox_background.src = "../img/chatbox_background.svg";
 
     //원본 이미지의 정보 저장
     var fileReader = new FileReader();
@@ -240,13 +240,13 @@ function toggle_reset(){
   cropper.crop();
   btnDisable = false;
   toggleBtn.setAttribute('value', 'on');
-  toggleBtn.setAttribute('src', '/img/toggle_grid_on@3x.png');
+  toggleBtn.setAttribute('src', '../img/toggle_grid_on@3x.png');
 }
 function toggle_set(){
   cropper.clear();
   btnDisable = true;
   toggleBtn.setAttribute('value', 'off');
-  toggleBtn.setAttribute('src', '/img/toggle_grid_off@3x.png');
+  toggleBtn.setAttribute('src', '../img/toggle_grid_off@3x.png');
 }
 
 function rotateLeft(){
@@ -717,7 +717,7 @@ function toggle_column(btn){
   var voteListBox = document.querySelector('.voteListBox');
   if(btn.getAttribute('value') === '2'){
     btn.setAttribute('value', '1');
-    btn.setAttribute('src', '/img/2row2.svg');
+    btn.setAttribute('src', '../img/2row2.svg');
     if(is_mobile()){
       voteListBox.classList.toggle('mVote2');
       voteListBox.classList.toggle('mVote1');
@@ -729,7 +729,7 @@ function toggle_column(btn){
   }
   else{
     btn.setAttribute('value', '2');
-    btn.setAttribute('src', '/img/1row.svg');
+    btn.setAttribute('src', '../img/1row.svg');
     if(is_mobile()){
       voteListBox.classList.toggle('mVote2');
       voteListBox.classList.toggle('mVote1');
