@@ -2,19 +2,19 @@ var windowWidth = window.innerWidth;
 var windowHeight = window.innerHeight;
 window.onload = function (){
   
-  var old_version = document.getElementById('version').innerHTML;
-  check_version_v3("../../../js/version_v3.txt",old_version,"select",function(rst){
-    if(rst =="ignore")
-      console.log(" select 버전 업그레이드 해주세요");
-    else if(rst=="fail")
-    {
-      location.reload();
-    }  
-  });
+  // var old_version = document.getElementById('version').innerHTML;
+  // check_version_v3("../../../js/version_v3.txt",old_version,"select",function(rst){
+  //   if(rst =="ignore")
+  //     console.log(" select 버전 업그레이드 해주세요");
+  //   else if(rst=="fail")
+  //   {
+  //     location.reload();
+  //   }  
+  // });
 
-  setTimeout(() => {
-    make_base64_from_profileImage();
-  }, 5000); 
+  // setTimeout(() => {
+  //   make_base64_from_profileImage();
+  // }, 5000); 
   windowWidth = window.innerWidth;
   windowHeight = window.innerHeight;
   if(!is_mobile()){
