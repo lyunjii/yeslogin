@@ -20,7 +20,7 @@ window.onload = function (){
 
     document.querySelector('.participant').style.paddingBottom = "38px";
     document.querySelector('#cordimail').style.width = "374px";
-    document.querySelector('.cordinator').style.paddingBottom = "60px";
+    document.querySelector('.coordinator').style.paddingBottom = "60px";
     document.querySelector('.okbtn').style.width = "494px";
   }
 }
